@@ -1,0 +1,1179 @@
+// JavaScript extracted from your HTML file
+// You can save this as script.js and link it in your HTML
+
+// Initialize date picker
+flatpickr(".datepicker", {
+    minDate: "today",
+    dateFormat: "Y-m-d",
+});
+
+// Initialize time picker
+flatpickr(".timepicker", {
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "H:i",
+    time_24hr: true
+});
+
+// Website Data
+const websiteData = {
+    areas: [
+        {
+            id: "hadayek-el-ahram",
+            nameEn: "Hadayek El-Ahram",
+            nameAr: "حدائق الأهرام",
+            descriptionEn: "Luxury accommodations near the iconic pyramids with breathtaking views.",
+            descriptionAr: "إقامة فاخرة بالقرب من الأهرامات الشهيرة مع إطلالات خلابة.",
+            image: "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+        },
+        {
+            id: "hadayek-october",
+            nameEn: "Hadayek October",
+            nameAr: "حدائق أكتوبر",
+            descriptionEn: "Modern properties in the heart of October City with premium amenities.",
+            descriptionAr: "عقارات حديثة في قلب مدينة أكتوبر مع مرافق فاخرة.",
+            image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+        },
+        {
+            id: "el-sheikh-zayed",
+            nameEn: "El-Sheikh Zayed",
+            nameAr: "الشيخ زايد",
+            descriptionEn: "Upscale residential area with luxurious villas and premium services.",
+            descriptionAr: "منطقة سكنية راقية مع فلل فاخرة وخدمات متميزة.",
+            image: "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&auto=format&fit=crop&w=2068&q=80"
+        },
+        {
+            id: "pyramids-area",
+            nameEn: "Pyramids Area",
+            nameAr: "منطقة الأهرامات",
+            descriptionEn: "Exclusive properties offering direct views of the ancient pyramids.",
+            descriptionAr: "عقارات حصرية تطل مباشرة على الأهرامات القديمة.",
+            image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+        }
+    ],
+    accommodationTypes: [
+        {
+            id: "villa",
+            nameEn: "Luxury Villa",
+            nameAr: "فيلا فاخرة",
+            price: 10,
+            featuresEn: [
+                "Private swimming pool",
+                "Fully equipped kitchen",
+                "3-5 bedrooms",
+                "Private garden",
+                "24/7 concierge service",
+                "Daily housekeeping",
+                "Free WiFi"
+            ],
+            featuresAr: [
+                "مسبح خاص",
+                "مطبخ مجهز بالكامل",
+                "3-5 غرف نوم",
+                "حديقة خاصة",
+                "خدمة كونسيرج 24/7",
+                "خدمة تنظيف يومية",
+                "واي فاي مجاني"
+            ],
+            image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80",
+            virtualTourAvailable: true,
+            virtualTourDescriptionEn: "Explore this stunning 5-bedroom villa with panoramic pyramid views, private pool, and luxury amenities in 360° detail.",
+            virtualTourDescriptionAr: "استكشف هذه الفيلا الرائعة المكونة من 5 غرف نوم مع إطلالات بانورامية على الأهرامات، ومسبح خاص، ومرافق فاخرة بتفاصيل 360°.",
+            priceHistory: [12, 11, 10, 9, 11, 12, 10, 9, 10, 11, 13, 12, 10, 9, 10],
+            averagePrice: 10.8,
+            trend: -0.8,
+            viewCount: 142
+        },
+        {
+            id: "building",
+            nameEn: "Premium Building",
+            nameAr: "مبنى فاخر",
+            price: 15,
+            featuresEn: [
+                "Multiple apartments per building",
+                "Shared amenities",
+                "Security service",
+                "Parking facilities",
+                "Elevator access",
+                "Central air conditioning",
+                "Maintenance team on-site"
+            ],
+            featuresAr: [
+                "شقق متعددة في المبنى",
+                "مرافق مشتركة",
+                "خدمة أمنية",
+                "مرافق انتظار السيارات",
+                "وصول بالمصعد",
+                "تكييف مركزي",
+                "فريق صيانة في الموقع"
+            ],
+            image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+            virtualTourAvailable: true,
+            virtualTourDescriptionEn: "Tour our premium building with luxury common areas, apartment layouts, and amenities in immersive 360°.",
+            virtualTourDescriptionAr: "جرب مبنانا الفاخر مع مناطق مشتركة فاخرة، وتخطيطات الشقق، والمرافق بتجربة غامرة 360°.",
+            priceHistory: [16, 15, 14, 16, 17, 15, 14, 15, 16, 14, 15, 16, 17, 15, 14],
+            averagePrice: 15.3,
+            trend: -0.3,
+            viewCount: 89
+        },
+        {
+            id: "apartment",
+            nameEn: "Furnished Apartment",
+            nameAr: "شقة مفروشة",
+            price: 5,
+            featuresEn: [
+                "1-3 bedrooms",
+                "Modern furniture",
+                "Kitchen appliances",
+                "Smart home features",
+                "Weekly cleaning service",
+                "High-speed internet",
+                "Flat-screen TV"
+            ],
+            featuresAr: [
+                "1-3 غرف نوم",
+                "أثاث حديث",
+                "أجهزة مطبخ",
+                "ميزات المنزل الذكي",
+                "خدمة تنظيف أسبوعية",
+                "إنترنت عالي السرعة",
+                "تلفزيون بشاشة مسطحة"
+            ],
+            image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2058&q=80",
+            virtualTourAvailable: true,
+            virtualTourDescriptionEn: "Walk through this beautifully furnished apartment with modern amenities and stylish interiors in 360° view.",
+            virtualTourDescriptionAr: "تجول في هذه الشقة المفروشة الجميلة مع المرافق الحديثة والديكورات الأنيقة من خلال عرض 360°.",
+            priceHistory: [6, 5, 4, 5, 6, 5, 4, 5, 6, 5, 4, 5, 6, 5, 4],
+            averagePrice: 5.0,
+            trend: 0,
+            viewCount: 256
+        }
+    ],
+    nearbyLocations: [
+        { type: "cafe", nameEn: "Pyramids View Café", nameAr: "مقهى إطلالة الأهرامات", distance: "0.2 km", icon: "fa-coffee" },
+        { type: "restaurant", nameEn: "Luxor Fine Dining", nameAr: "مطعم الأقصر الفاخر", distance: "0.5 km", icon: "fa-utensils" },
+        { type: "museum", nameEn: "Egyptian History Museum", nameAr: "متحف التاريخ المصري", distance: "1.2 km", icon: "fa-landmark" },
+        { type: "mall", nameEn: "Cairo Mall", nameAr: "مول القاهرة", distance: "2.1 km", icon: "fa-shopping-bag" },
+        { type: "pharmacy", nameEn: "24/7 Pharmacy", nameAr: "صيدلية 24/7", distance: "0.3 km", icon: "fa-prescription-bottle" },
+        { type: "hospital", nameEn: "Cairo Medical Center", nameAr: "المركز الطبي بالقاهرة", distance: "1.5 km", icon: "fa-hospital" },
+        { type: "gym", nameEn: "Elite Fitness Center", nameAr: "مركز النخبة لللياقة", distance: "0.8 km", icon: "fa-dumbbell" },
+        { type: "workspace", nameEn: "Co-Working Space", nameAr: "مساحة العمل المشتركة", distance: "0.8 km", icon: "fa-laptop" },
+        { type: "cafe", nameEn: "Desert Oasis Coffee", nameAr: "قهوة واحة الصحراء", distance: "0.7 km", icon: "fa-coffee" },
+        { type: "restaurant", nameEn: "Nile River Restaurant", nameAr: "مطعم نهر النيل", distance: "1.0 km", icon: "fa-utensils" },
+        { type: "pharmacy", nameEn: "Quick Pharmacy", nameAr: "الصيدلية السريعة", distance: "0.9 km", icon: "fa-prescription-bottle" },
+        { type: "gym", nameEn: "Pyramid Gym", nameAr: "نادي الأهرام الرياضي", distance: "1.3 km", icon: "fa-dumbbell" }
+    ],
+    mapCategories: [
+        { id: "all", nameEn: "All Locations", nameAr: "جميع المواقع", icon: "fa-layer-group" },
+        { id: "cafe", nameEn: "Cafes", nameAr: "مقاهي", icon: "fa-coffee" },
+        { id: "restaurant", nameEn: "Restaurants", nameAr: "مطاعم", icon: "fa-utensils" },
+        { id: "museum", nameEn: "Museums", nameAr: "متاحف", icon: "fa-landmark" },
+        { id: "mall", nameEn: "Shopping Malls", nameAr: "مراكز تسوق", icon: "fa-shopping-bag" },
+        { id: "pharmacy", nameEn: "Pharmacies", nameAr: "صيدليات", icon: "fa-prescription-bottle" },
+        { id: "hospital", nameEn: "Hospitals", nameAr: "مستشفيات", icon: "fa-hospital" },
+        { id: "gym", nameEn: "Gyms", nameAr: "نوادي رياضية", icon: "fa-dumbbell" },
+        { id: "workspace", nameEn: "Workspaces", nameAr: "مساحات عمل", icon: "fa-laptop" }
+    ],
+    rideOptions: {
+        sedan: { price: 50, nameEn: "Premium Sedan", nameAr: "سيارة سيدان فاخرة" },
+        suv: { price: 75, nameEn: "Luxury SUV", nameAr: "سيارة دفع رباعي فاخرة" },
+        withDriver: { price: 30, nameEn: "With Driver", nameAr: "مع سائق" },
+        withoutDriver: { price: 0, nameEn: "Without Driver", nameAr: "بدون سائق" }
+    }
+};
+
+// Current booking state
+let currentBooking = {
+    areaId: null,
+    accommodationId: null,
+    price: 0,
+    nights: 1
+};
+
+// Ride booking state
+let rideBooking = {
+    vehicleType: null,
+    driverOption: null
+};
+
+// Virtual tour state
+let virtualTour = {
+    autoRotateInterval: null,
+    isAutoRotating: false,
+    rotationAngle: 0
+};
+
+// Language Toggle Functionality
+const languageToggle = document.getElementById('languageToggle');
+const langText = document.querySelector('.lang-text');
+const body = document.body;
+let currentLang = 'en';
+
+languageToggle.addEventListener('click', function() {
+    if (currentLang === 'en') {
+        // Switch to Arabic
+        currentLang = 'ar';
+        langText.textContent = 'English';
+        body.classList.remove('ltr');
+        body.classList.add('rtl');
+        body.setAttribute('dir', 'rtl');
+    } else {
+        // Switch to English
+        currentLang = 'en';
+        langText.textContent = 'العربية';
+        body.classList.remove('rtl');
+        body.classList.add('ltr');
+        body.setAttribute('dir', 'ltr');
+    }
+    
+    // Update all elements with data attributes
+    updateContentLanguage();
+});
+
+function updateContentLanguage() {
+    // Update all elements with data attributes
+    document.querySelectorAll('[data-en]').forEach(element => {
+        if (currentLang === 'en') {
+            if (element.hasAttribute('data-en')) {
+                element.textContent = element.getAttribute('data-en');
+            }
+            if (element.hasAttribute('placeholder-en')) {
+                element.setAttribute('placeholder', element.getAttribute('placeholder-en'));
+            }
+        } else {
+            if (element.hasAttribute('data-ar')) {
+                element.textContent = element.getAttribute('data-ar');
+            }
+            if (element.hasAttribute('placeholder-ar')) {
+                element.setAttribute('placeholder', element.getAttribute('placeholder-ar'));
+            }
+        }
+    });
+    
+    // Update area booking title if on area booking page
+    const areaBookingPage = document.getElementById('areaBookingPage');
+    if (areaBookingPage.classList.contains('active')) {
+        updateAreaBookingPage();
+    }
+    
+    // Update modals if open
+    updateOpenModals();
+}
+
+// Mobile Menu Toggle
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mainNav = document.getElementById('mainNav');
+
+mobileMenuBtn.addEventListener('click', function() {
+    mainNav.classList.toggle('active');
+    mobileMenuBtn.innerHTML = mainNav.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+});
+
+// Close mobile menu when clicking a link
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function() {
+        mainNav.classList.remove('active');
+        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+    });
+});
+
+// Update current year in footer
+document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        
+        // Don't prevent default for booking links
+        if (targetId === '#booking') {
+            showBookingPage();
+            e.preventDefault();
+            return;
+        }
+        
+        if (targetId === '#home') {
+            showHomePage();
+            e.preventDefault();
+            return;
+        }
+        
+        if (targetId === '#' || targetId === '#bookingPage' || targetId === '#areaBookingPage') {
+            e.preventDefault();
+            return;
+        }
+        
+        e.preventDefault();
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// Customer Service Modal Functionality
+const customerServiceBtn = document.getElementById('customerServiceBtn');
+const customerServiceModal = document.getElementById('customerServiceModal');
+const closeServiceModalBtn = document.getElementById('closeServiceModal');
+const chatOption = document.getElementById('chatOption');
+const callOption = document.getElementById('callOption');
+
+// Open customer service modal
+customerServiceBtn.addEventListener('click', function() {
+    openCustomerServiceModal();
+});
+
+// Close customer service modal
+closeServiceModalBtn.addEventListener('click', closeCustomerServiceModal);
+customerServiceModal.addEventListener('click', function(e) {
+    if (e.target === customerServiceModal) {
+        closeCustomerServiceModal();
+    }
+});
+
+// Close with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && customerServiceModal.classList.contains('active')) {
+        closeCustomerServiceModal();
+    }
+});
+
+function openCustomerServiceModal() {
+    customerServiceModal.classList.add('active');
+}
+
+function closeCustomerServiceModal() {
+    customerServiceModal.classList.remove('active');
+}
+
+// Chat option
+chatOption.addEventListener('click', function() {
+    if (currentLang === 'en') {
+        alert('Opening live chat...\n\nIn a real implementation, this would open a chat window with our customer service team.');
+    } else {
+        alert('فتح الدردشة المباشرة...\n\nفي التطبيق الحقيقي، سيتم فتح نافذة دردشة مع فريق خدمة العملاء لدينا.');
+    }
+    closeCustomerServiceModal();
+});
+
+// Call option
+callOption.addEventListener('click', function() {
+    if (currentLang === 'en') {
+        alert('Calling +20 12 345 6789...\n\nIn a real implementation, this would initiate a phone call to our customer service line.');
+    } else {
+        alert('جاري الاتصال بـ +20 12 345 6789...\n\nفي التطبيق الحقيقي، سيتم بدء مكالمة هاتفية مع خط خدمة العملاء لدينا.');
+    }
+    closeCustomerServiceModal();
+});
+
+// Booking Details Modal Functionality
+const bookingDetailsModal = document.getElementById('bookingDetailsModal');
+const closeBookingDetailsBtn = document.getElementById('closeBookingDetails');
+const decreaseNightsBtn = document.getElementById('decreaseNights');
+const increaseNightsBtn = document.getElementById('increaseNights');
+const nightsValue = document.getElementById('nightsValue');
+const totalPrice = document.getElementById('totalPrice');
+const priceBreakdown = document.getElementById('priceBreakdown');
+const confirmBookingBtn = document.getElementById('confirmBooking');
+
+// Close booking details modal
+closeBookingDetailsBtn.addEventListener('click', closeBookingDetailsModal);
+bookingDetailsModal.addEventListener('click', function(e) {
+    if (e.target === bookingDetailsModal) {
+        closeBookingDetailsModal();
+    }
+});
+
+// Close with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && bookingDetailsModal.classList.contains('active')) {
+        closeBookingDetailsModal();
+    }
+});
+
+function openBookingDetailsModal(areaId, accommodationId) {
+    const area = websiteData.areas.find(a => a.id === areaId);
+    const accommodation = websiteData.accommodationTypes.find(a => a.id === accommodationId);
+    
+    // Update current booking state
+    currentBooking.areaId = areaId;
+    currentBooking.accommodationId = accommodationId;
+    currentBooking.price = accommodation.price;
+    currentBooking.nights = 1;
+    
+    // Update modal title
+    const modalTitle = document.getElementById('bookingModalTitle');
+    if (currentLang === 'en') {
+        modalTitle.textContent = `Book ${accommodation.nameEn} in ${area.nameEn}`;
+    } else {
+        modalTitle.textContent = `احجز ${accommodation.nameAr} في ${area.nameAr}`;
+    }
+    
+    // Update accommodation summary
+    const accommodationSummary = document.getElementById('accommodationSummary');
+    accommodationSummary.innerHTML = `
+        <div class="accommodation-image">
+            <img src="${accommodation.image}" alt="${accommodation.nameEn}">
+        </div>
+        <div class="accommodation-info">
+            <h4>
+                <span class="summary-name-en">${accommodation.nameEn}</span>
+                <span class="summary-name-ar" style="display:none;">${accommodation.nameAr}</span>
+            </h4>
+            <p>
+                <span class="summary-area-en">${area.nameEn}</span>
+                <span class="summary-area-ar" style="display:none;">${area.nameAr}</span>
+            </p>
+            <div class="accommodation-price">$${accommodation.price}<span data-en="/night" data-ar="/ليلة">/night</span></div>
+            <div style="margin-top: 10px; font-size: 0.9rem; color: var(--text-light);">
+                <i class="fas fa-eye"></i> 
+                <span data-en="${accommodation.viewCount} people viewed this" data-ar="${accommodation.viewCount} شخص شاهد هذا">${accommodation.viewCount} people viewed this</span>
+            </div>
+        </div>
+    `;
+    
+    // Reset nights to 1
+    nightsValue.textContent = '1';
+    updateTotalPrice();
+    
+    // Show modal
+    bookingDetailsModal.classList.add('active');
+    
+    // Update language for new elements
+    updateContentLanguage();
+}
+
+function closeBookingDetailsModal() {
+    bookingDetailsModal.classList.remove('active');
+}
+
+// Nights control
+decreaseNightsBtn.addEventListener('click', function() {
+    let nights = parseInt(nightsValue.textContent);
+    if (nights > 1) {
+        nights--;
+        nightsValue.textContent = nights;
+        currentBooking.nights = nights;
+        updateTotalPrice();
+    }
+});
+
+increaseNightsBtn.addEventListener('click', function() {
+    let nights = parseInt(nightsValue.textContent);
+    if (nights < 30) {
+        nights++;
+        nightsValue.textContent = nights;
+        currentBooking.nights = nights;
+        updateTotalPrice();
+    }
+});
+
+function updateTotalPrice() {
+    const total = currentBooking.price * currentBooking.nights;
+    totalPrice.textContent = `$${total}`;
+    
+    if (currentLang === 'en') {
+        priceBreakdown.textContent = `$${currentBooking.price} × ${currentBooking.nights} night${currentBooking.nights > 1 ? 's' : ''}`;
+    } else {
+        priceBreakdown.textContent = `$${currentBooking.price} × ${currentBooking.nights} ليلة${currentBooking.nights > 1 ? '' : 'ة'}`;
+    }
+}
+
+// Confirm booking
+confirmBookingBtn.addEventListener('click', function() {
+    const guestName = document.getElementById('guestName').value;
+    const guestEmail = document.getElementById('guestEmail').value;
+    const guestPhone = document.getElementById('guestPhone').value;
+    const checkInDate = document.getElementById('checkInDate').value;
+    const specialRequests = document.getElementById('specialRequests').value;
+    
+    if (!guestName || !guestEmail || !guestPhone || !checkInDate) {
+        if (currentLang === 'en') {
+            alert('Please fill in all required fields.');
+        } else {
+            alert('يرجى ملء جميع الحقول المطلوبة.');
+        }
+        return;
+    }
+    
+    const area = websiteData.areas.find(a => a.id === currentBooking.areaId);
+    const accommodation = websiteData.accommodationTypes.find(a => a.id === currentBooking.accommodationId);
+    const total = currentBooking.price * currentBooking.nights;
+    
+    if (currentLang === 'en') {
+        alert(`Booking confirmed!\n\nDetails:\nAccommodation: ${accommodation.nameEn}\nArea: ${area.nameEn}\nCheck-in: ${checkInDate}\nNights: ${currentBooking.nights}\nTotal Price: $${total}\n\nGuest Information:\nName: ${guestName}\nEmail: ${guestEmail}\nPhone: ${guestPhone}\n\nSpecial Requests: ${specialRequests || 'None'}\n\nA confirmation email has been sent to ${guestEmail}.`);
+    } else {
+        alert(`تم تأكيد الحجز!\n\nالتفاصيل:\nالإقامة: ${accommodation.nameAr}\nالمنطقة: ${area.nameAr}\nتاريخ الوصول: ${checkInDate}\nالليالي: ${currentBooking.nights}\nالسعر الإجمالي: $${total}\n\nمعلومات الضيف:\nالاسم: ${guestName}\nالبريد الإلكتروني: ${guestEmail}\nالهاتف: ${guestPhone}\n\nالطلبات الخاصة: ${specialRequests || 'لا توجد'}\n\nتم إرسال بريد تأكيد إلى ${guestEmail}.`);
+    }
+    
+    closeBookingDetailsModal();
+    
+    // Reset form
+    document.getElementById('guestName').value = '';
+    document.getElementById('guestEmail').value = '';
+    document.getElementById('guestPhone').value = '';
+    document.getElementById('checkInDate').value = '';
+    document.getElementById('specialRequests').value = '';
+});
+
+// Ride Booking Modal Functionality - FIXED
+const rideBookingModal = document.getElementById('rideBookingModal');
+const closeRideModalBtn = document.getElementById('closeRideModal');
+const bookRideBtn = document.getElementById('bookRideBtn');
+const confirmRideBookingBtn = document.getElementById('confirmRideBooking');
+
+// Open ride booking modal
+bookRideBtn.addEventListener('click', function() {
+    openRideBookingModal();
+});
+
+// Close ride booking modal
+closeRideModalBtn.addEventListener('click', closeRideBookingModal);
+rideBookingModal.addEventListener('click', function(e) {
+    if (e.target === rideBookingModal) {
+        closeRideBookingModal();
+    }
+});
+
+// Close with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && rideBookingModal.classList.contains('active')) {
+        closeRideBookingModal();
+    }
+});
+
+function openRideBookingModal() {
+    // Reset selections
+    rideBooking.vehicleType = null;
+    rideBooking.driverOption = null;
+    
+    // Update selections
+    updateRideSelections();
+    
+    // Show modal
+    rideBookingModal.classList.add('active');
+}
+
+function closeRideBookingModal() {
+    rideBookingModal.classList.remove('active');
+}
+
+// Vehicle type selection
+document.querySelectorAll('.ride-option-card[data-type]').forEach(card => {
+    card.addEventListener('click', function() {
+        rideBooking.vehicleType = this.getAttribute('data-type');
+        updateRideSelections();
+    });
+});
+
+// Driver option selection
+document.querySelectorAll('.ride-option-card[data-driver]').forEach(card => {
+    card.addEventListener('click', function() {
+        rideBooking.driverOption = this.getAttribute('data-driver');
+        updateRideSelections();
+    });
+});
+
+function updateRideSelections() {
+    // Update vehicle selection
+    document.querySelectorAll('.ride-option-card[data-type]').forEach(card => {
+        if (card.getAttribute('data-type') === rideBooking.vehicleType) {
+            card.classList.add('selected');
+        } else {
+            card.classList.remove('selected');
+        }
+    });
+    
+    // Update driver selection
+    document.querySelectorAll('.ride-option-card[data-driver]').forEach(card => {
+        if (card.getAttribute('data-driver') === rideBooking.driverOption) {
+            card.classList.add('selected');
+        } else {
+            card.classList.remove('selected');
+        }
+    });
+    
+    // Enable/disable confirm button
+    if (rideBooking.vehicleType && rideBooking.driverOption) {
+        confirmRideBookingBtn.disabled = false;
+        confirmRideBookingBtn.style.opacity = '1';
+        confirmRideBookingBtn.style.cursor = 'pointer';
+    } else {
+        confirmRideBookingBtn.disabled = true;
+        confirmRideBookingBtn.style.opacity = '0.6';
+        confirmRideBookingBtn.style.cursor = 'not-allowed';
+    }
+}
+
+// Confirm ride booking
+confirmRideBookingBtn.addEventListener('click', function() {
+    if (!rideBooking.vehicleType || !rideBooking.driverOption) return;
+    
+    const pickupLocation = document.getElementById('pickupLocation').value;
+    const destination = document.getElementById('destination').value;
+    const pickupDate = document.getElementById('pickupDate').value;
+    const pickupTime = document.getElementById('pickupTime').value;
+    const rentalDuration = document.getElementById('rentalDuration').value;
+    const specialRequests = document.getElementById('rideSpecialRequests').value;
+    
+    // Calculate price
+    let totalPrice = websiteData.rideOptions[rideBooking.vehicleType].price;
+    if (rideBooking.driverOption === 'with') {
+        totalPrice += websiteData.rideOptions.withDriver.price;
+    }
+    
+    // Multiplier for duration
+    const durationMultipliers = { daily: 1, weekly: 7, monthly: 30 };
+    totalPrice *= durationMultipliers[rentalDuration];
+    
+    if (currentLang === 'en') {
+        alert(`Ride booked successfully!\n\nDetails:\nVehicle: ${websiteData.rideOptions[rideBooking.vehicleType].nameEn}\nDriver: ${rideBooking.driverOption === 'with' ? 'With professional driver' : 'Self-drive'}\nPickup: ${pickupLocation || 'Not specified'}\nDestination: ${destination || 'Not specified'}\nDate: ${pickupDate || 'Not specified'}\nTime: ${pickupTime || 'Not specified'}\nDuration: ${rentalDuration}\nTotal Price: $${totalPrice}\n\nSpecial Requests: ${specialRequests || 'None'}`);
+    } else {
+        alert(`تم حجز الرحلة بنجاح!\n\nالتفاصيل:\nالمركبة: ${websiteData.rideOptions[rideBooking.vehicleType].nameAr}\nالسائق: ${rideBooking.driverOption === 'with' ? 'مع سائق محترف' : 'قيادة ذاتية'}\nموقع الاستلام: ${pickupLocation || 'غير محدد'}\nالوجهة: ${destination || 'غير محدد'}\nالتاريخ: ${pickupDate || 'غير محدد'}\nالوقت: ${pickupTime || 'غير محدد'}\nالمدة: ${rentalDuration}\nالسعر الإجمالي: $${totalPrice}\n\nالطلبات الخاصة: ${specialRequests || 'لا توجد'}`);
+    }
+    
+    closeRideBookingModal();
+    
+    // Reset form
+    document.getElementById('pickupLocation').value = '';
+    document.getElementById('destination').value = '';
+    document.getElementById('pickupDate').value = '';
+    document.getElementById('pickupTime').value = '';
+    document.getElementById('rideSpecialRequests').value = '';
+});
+
+// Virtual Walkthrough Modal Functionality - FIXED
+const virtualWalkthroughModal = document.getElementById('virtualWalkthroughModal');
+const closeModalBtn = document.getElementById('closeModal');
+const walkthroughPlaceholder = document.getElementById('walkthroughPlaceholder');
+const walkthroughTitle = document.getElementById('walkthroughTitle');
+const walkthroughDescription = document.getElementById('walkthroughDescription');
+const modalTitle = document.getElementById('modalTitle');
+
+// Close modal when clicking X or outside modal
+closeModalBtn.addEventListener('click', closeVirtualModal);
+virtualWalkthroughModal.addEventListener('click', function(e) {
+    if (e.target === virtualWalkthroughModal) {
+        closeVirtualModal();
+    }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && virtualWalkthroughModal.classList.contains('active')) {
+        closeVirtualModal();
+    }
+});
+
+function closeVirtualModal() {
+    virtualWalkthroughModal.classList.remove('active');
+    stopAutoRotation();
+}
+
+function showVirtualTour(areaId, accommodationId) {
+    const area = websiteData.areas.find(a => a.id === areaId);
+    const accommodation = websiteData.accommodationTypes.find(a => a.id === accommodationId);
+    
+    // Update modal title
+    if (currentLang === 'en') {
+        modalTitle.textContent = `Virtual Walkthrough: ${accommodation.nameEn} in ${area.nameEn}`;
+        walkthroughTitle.textContent = `${accommodation.nameEn} - ${area.nameEn}`;
+        walkthroughDescription.textContent = accommodation.virtualTourDescriptionEn || "Experience this property in immersive 360° virtual reality.";
+    } else {
+        modalTitle.textContent = `جولة افتراضية 360°: ${accommodation.nameAr} في ${area.nameAr}`;
+        walkthroughTitle.textContent = `${accommodation.nameAr} - ${area.nameAr}`;
+        walkthroughDescription.textContent = accommodation.virtualTourDescriptionAr || "جرب هذه العقار بتقنية الواقع الافتراضي 360° الغامرة.";
+    }
+    
+    // Reset rotation
+    virtualTour.rotationAngle = 0;
+    updateWalkthroughRotation();
+    
+    // Show modal
+    virtualWalkthroughModal.classList.add('active');
+}
+
+// Virtual tour controls simulation
+document.getElementById('rotateLeft').addEventListener('click', function() {
+    virtualTour.rotationAngle -= 45;
+    updateWalkthroughRotation();
+});
+
+document.getElementById('rotateRight').addEventListener('click', function() {
+    virtualTour.rotationAngle += 45;
+    updateWalkthroughRotation();
+});
+
+document.getElementById('toggleAutoRotate').addEventListener('click', function() {
+    if (virtualTour.isAutoRotating) {
+        stopAutoRotation();
+    } else {
+        startAutoRotation();
+    }
+});
+
+function updateWalkthroughRotation() {
+    const icon = document.getElementById('autoRotateIcon');
+    walkthroughPlaceholder.style.transform = `rotateY(${virtualTour.rotationAngle}deg)`;
+    
+    // Update auto-rotate button icon
+    if (virtualTour.isAutoRotating) {
+        icon.className = 'fas fa-pause';
+    } else {
+        icon.className = 'fas fa-play';
+    }
+}
+
+function startAutoRotation() {
+    virtualTour.isAutoRotating = true;
+    updateWalkthroughRotation();
+    
+    virtualTour.autoRotateInterval = setInterval(function() {
+        virtualTour.rotationAngle += 5;
+        if (virtualTour.rotationAngle >= 360) virtualTour.rotationAngle = 0;
+        updateWalkthroughRotation();
+    }, 100);
+}
+
+function stopAutoRotation() {
+    virtualTour.isAutoRotating = false;
+    clearInterval(virtualTour.autoRotateInterval);
+    updateWalkthroughRotation();
+}
+
+// Offline Maps Modal Functionality - FIXED
+const mapsModal = document.getElementById('mapsModal');
+const closeMapsModalBtn = document.getElementById('closeMapsModal');
+const viewMapsBtn = document.getElementById('viewMapsBtn');
+let currentCategory = 'all';
+
+// Open maps modal
+viewMapsBtn.addEventListener('click', function() {
+    openMapsModal();
+});
+
+// Close maps modal
+closeMapsModalBtn.addEventListener('click', closeMapsModal);
+mapsModal.addEventListener('click', function(e) {
+    if (e.target === mapsModal) {
+        closeMapsModal();
+    }
+});
+
+// Close with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && mapsModal.classList.contains('active')) {
+        closeMapsModal();
+    }
+});
+
+function openMapsModal() {
+    mapsModal.classList.add('active');
+    populateMapCategories();
+    populateMapLocations();
+}
+
+function closeMapsModal() {
+    mapsModal.classList.remove('active');
+}
+
+// Populate map categories - FIXED
+function populateMapCategories() {
+    const mapCategories = document.getElementById('mapCategories');
+    mapCategories.innerHTML = '';
+    
+    websiteData.mapCategories.forEach(category => {
+        const categoryElement = document.createElement('div');
+        categoryElement.className = `map-category ${category.id} ${category.id === currentCategory ? 'active' : ''}`;
+        categoryElement.setAttribute('data-category', category.id);
+        
+        categoryElement.innerHTML = `
+            <div class="map-category-icon">
+                <i class="fas ${category.icon}"></i>
+            </div>
+            <span class="category-name-en">${category.nameEn}</span>
+            <span class="category-name-ar" style="display:none;">${category.nameAr}</span>
+        `;
+        
+        categoryElement.addEventListener('click', function() {
+            currentCategory = this.getAttribute('data-category');
+            
+            // Update active category
+            document.querySelectorAll('.map-category').forEach(cat => {
+                cat.classList.remove('active');
+            });
+            this.classList.add('active');
+            
+            populateMapLocations();
+        });
+        
+        mapCategories.appendChild(categoryElement);
+    });
+    
+    // Update language for new elements
+    updateContentLanguage();
+}
+
+// Populate map locations based on current category - FIXED
+function populateMapLocations() {
+    const mapLocations = document.getElementById('mapLocations');
+    mapLocations.innerHTML = '';
+    
+    let filteredLocations = websiteData.nearbyLocations;
+    if (currentCategory !== 'all') {
+        filteredLocations = websiteData.nearbyLocations.filter(loc => loc.type === currentCategory);
+    }
+    
+    filteredLocations.forEach(location => {
+        const locationItem = document.createElement('div');
+        locationItem.className = `map-location-item ${location.type}`;
+        locationItem.setAttribute('data-type', location.type);
+        
+        locationItem.innerHTML = `
+            <div class="map-location-header">
+                <div class="map-location-icon">
+                    <i class="fas ${location.icon}"></i>
+                </div>
+                <h4>
+                    <span class="location-name-en">${location.nameEn}</span>
+                    <span class="location-name-ar" style="display:none;">${location.nameAr}</span>
+                </h4>
+            </div>
+            <div class="map-location-distance">${location.distance} <span data-en="away" data-ar="بعيدًا">away</span></div>
+        `;
+        
+        mapLocations.appendChild(locationItem);
+    });
+    
+    // Update language for new elements
+    updateContentLanguage();
+}
+
+// Download map button
+document.getElementById('downloadMapBtn').addEventListener('click', function() {
+    const categoryName = websiteData.mapCategories.find(cat => cat.id === currentCategory);
+    if (currentLang === 'en') {
+        alert(`Downloading offline map for ${categoryName.nameEn}...\n\nIn a real implementation, this would download a high-resolution map of the area with all ${currentCategory === 'all' ? 'locations' : categoryName.nameEn.toLowerCase()} marked for offline use.`);
+    } else {
+        alert(`جارٍ تنزيل الخريطة دون اتصال لـ ${categoryName.nameAr}...\n\nفي التطبيق الحقيقي، سيقوم هذا بتنزيل خريطة عالية الدقة للمنطقة مع جميع ${currentCategory === 'all' ? 'المواقع' : categoryName.nameAr} المحددة للاستخدام دون اتصال.`);
+    }
+});
+
+function updateOpenModals() {
+    // Update open modals based on current language
+    if (customerServiceModal.classList.contains('active')) {
+        updateContentLanguage();
+    }
+    
+    if (bookingDetailsModal.classList.contains('active')) {
+        updateContentLanguage();
+    }
+    
+    if (rideBookingModal.classList.contains('active')) {
+        updateContentLanguage();
+    }
+    
+    if (mapsModal.classList.contains('active')) {
+        updateContentLanguage();
+        populateMapCategories();
+        populateMapLocations();
+    }
+    
+    if (virtualWalkthroughModal.classList.contains('active')) {
+        updateContentLanguage();
+    }
+}
+
+// Show booking page function
+function showBookingPage() {
+    // Hide hero and other sections
+    document.querySelector('.hero').style.display = 'none';
+    document.getElementById('about').style.display = 'none';
+    document.getElementById('services').style.display = 'none';
+    document.getElementById('team').style.display = 'none';
+    document.getElementById('contact').style.display = 'none';
+    
+    // Show booking page
+    document.getElementById('bookingPage').classList.add('active');
+    document.getElementById('areaBookingPage').classList.remove('active');
+    
+    // Populate areas
+    populateAreas();
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Show home page function
+function showHomePage() {
+    // Show all sections
+    document.querySelector('.hero').style.display = 'flex';
+    document.getElementById('about').style.display = 'block';
+    document.getElementById('services').style.display = 'block';
+    document.getElementById('team').style.display = 'block';
+    document.getElementById('contact').style.display = 'block';
+    
+    // Hide booking pages
+    document.getElementById('bookingPage').classList.remove('active');
+    document.getElementById('areaBookingPage').classList.remove('active');
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Populate areas in the booking page
+function populateAreas() {
+    const areasGrid = document.getElementById('areasGrid');
+    areasGrid.innerHTML = '';
+    
+    websiteData.areas.forEach(area => {
+        const areaCard = document.createElement('div');
+        areaCard.className = 'area-card';
+        areaCard.setAttribute('data-area-id', area.id);
+        
+        areaCard.innerHTML = `
+            <div class="area-image">
+                <img src="${area.image}" alt="${area.nameEn}">
+            </div>
+            <div class="area-content">
+                <h3>
+                    <span class="area-name-en">${area.nameEn}</span>
+                    <span class="area-name-ar" style="display:none;">${area.nameAr}</span>
+                </h3>
+                <p>
+                    <span class="area-desc-en">${area.descriptionEn}</span>
+                    <span class="area-desc-ar" style="display:none;">${area.descriptionAr}</span>
+                </p>
+                <div class="book-area-btn" style="margin-top: 15px;">
+                    <button class="btn btn-primary" style="width: 100%;" data-en="View Options" data-ar="عرض الخيارات">View Options</button>
+                </div>
+            </div>
+        `;
+        
+        areaCard.addEventListener('click', () => {
+            showAreaBookingPage(area.id);
+        });
+        
+        areasGrid.appendChild(areaCard);
+    });
+    
+    // Update language for new elements
+    updateContentLanguage();
+}
+
+// Show area booking page with accommodation options
+function showAreaBookingPage(areaId) {
+    // Hide areas page
+    document.getElementById('bookingPage').classList.remove('active');
+    
+    // Show area booking page
+    document.getElementById('areaBookingPage').classList.add('active');
+    
+    // Update area title
+    const area = websiteData.areas.find(a => a.id === areaId);
+    const areaBookingTitle = document.getElementById('areaBookingTitle');
+    const areaBookingDesc = document.getElementById('areaBookingDesc');
+    
+    if (currentLang === 'en') {
+        areaBookingTitle.textContent = `Accommodation Options in ${area.nameEn}`;
+        areaBookingDesc.textContent = 'Choose your preferred accommodation type';
+    } else {
+        areaBookingTitle.textContent = `خيارات الإقامة في ${area.nameAr}`;
+        areaBookingDesc.textContent = 'اختر نوع الإقامة المفضل لديك';
+    }
+    
+    // Populate accommodation options
+    populateAccommodationOptions(areaId);
+    
+    // Update back button to go back to areas
+    document.getElementById('backToAreas').onclick = (e) => {
+        e.preventDefault();
+        document.getElementById('areaBookingPage').classList.remove('active');
+        document.getElementById('bookingPage').classList.add('active');
+    };
+}
+
+// Populate accommodation options for a specific area
+function populateAccommodationOptions(areaId) {
+    const accommodationOptions = document.getElementById('accommodationOptions');
+    accommodationOptions.innerHTML = '';
+    
+    const area = websiteData.areas.find(a => a.id === areaId);
+    
+    websiteData.accommodationTypes.forEach(accommodation => {
+        const optionCard = document.createElement('div');
+        optionCard.className = 'option-card';
+        
+        // Get features based on current language
+        const features = currentLang === 'en' ? accommodation.featuresEn : accommodation.featuresAr;
+        
+        // Determine price badge
+        let priceBadgeClass = 'price-average';
+        let priceBadgeText = '';
+        
+        if (accommodation.trend < -0.5) {
+            priceBadgeClass = 'price-good';
+            priceBadgeText = currentLang === 'en' ? 'Best Value' : 'أفضل قيمة';
+        } else if (accommodation.trend > 0.5) {
+            priceBadgeClass = 'price-high';
+            priceBadgeText = currentLang === 'en' ? 'High Demand' : 'طلب مرتفع';
+        } else {
+            priceBadgeClass = 'price-average';
+            priceBadgeText = currentLang === 'en' ? 'Average Price' : 'سعر متوسط';
+        }
+        
+        optionCard.innerHTML = `
+            <div class="option-image">
+                <img src="${accommodation.image}" alt="${accommodation.nameEn}">
+                ${accommodation.virtualTourAvailable ? `
+                    <div class="virtual-badge">
+                        <i class="fas fa-vr-cardboard"></i>
+                        <span data-en="360° View" data-ar="عرض 360°">360° View</span>
+                    </div>
+                ` : ''}
+                <div class="view-count-badge">
+                    <i class="fas fa-eye"></i>
+                    <span class="view-count">${accommodation.viewCount}</span>
+                </div>
+            </div>
+            <div class="option-content">
+                <div class="option-header">
+                    <h3>
+                        <span class="option-name-en">${accommodation.nameEn}</span>
+                        <span class="option-name-ar" style="display:none;">${accommodation.nameAr}</span>
+                    </h3>
+                    <div class="price-container">
+                        <div class="price">$${accommodation.price}<span data-en="/night" data-ar="/ليلة">/night</span></div>
+                        <div class="price-history-badge ${priceBadgeClass}">${priceBadgeText}</div>
+                    </div>
+                </div>
+                <div class="option-features">
+                    ${features.map(feature => `
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>${feature}</span>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="option-actions">
+                    ${accommodation.virtualTourAvailable ? `
+                        <button class="btn btn-secondary virtual-tour-btn" 
+                                data-area="${areaId}" 
+                                data-accommodation="${accommodation.id}"
+                                data-en="Virtual Tour" 
+                                data-ar="جولة افتراضية">Virtual Tour</button>
+                    ` : ''}
+                    <button class="btn btn-warning offline-maps-btn" 
+                            data-area="${areaId}" 
+                            data-accommodation="${accommodation.id}"
+                            data-en="Area Guide" 
+                            data-ar="دليل المنطقة">Area Guide</button>
+                </div>
+            </div>
+        `;
+        
+        // Make the entire card clickable for booking
+        optionCard.addEventListener('click', function(e) {
+            // Don't trigger if clicking on buttons
+            if (!e.target.closest('.btn')) {
+                openBookingDetailsModal(areaId, accommodation.id);
+            }
+        });
+        
+        accommodationOptions.appendChild(optionCard);
+    });
+    
+    // Update language for new elements
+    updateContentLanguage();
+    
+    // Add event listeners to virtual tour buttons
+    document.querySelectorAll('.virtual-tour-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent card click
+            const areaId = this.getAttribute('data-area');
+            const accommodationId = this.getAttribute('data-accommodation');
+            showVirtualTour(areaId, accommodationId);
+        });
+    });
+    
+    // Add event listeners to offline maps buttons
+    document.querySelectorAll('.offline-maps-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent card click
+            openMapsModal();
+        });
+    });
+}
+
+// Update area booking page based on current language
+function updateAreaBookingPage() {
+    const areaBookingPage = document.getElementById('areaBookingPage');
+    if (areaBookingPage.classList.contains('active')) {
+        // Find which area is currently active
+        const areaBookingTitle = document.getElementById('areaBookingTitle');
+        const currentTitle = areaBookingTitle.textContent;
+        
+        // Extract area name from title
+        let areaName = '';
+        if (currentLang === 'en') {
+            areaName = currentTitle.replace('Accommodation Options in ', '');
+        } else {
+            areaName = currentTitle.replace('خيارات الإقامة في ', '');
+        }
+        
+        // Find the area by name
+        let areaId = '';
+        if (currentLang === 'en') {
+            const area = websiteData.areas.find(a => a.nameEn === areaName);
+            if (area) areaId = area.id;
+        } else {
+            const area = websiteData.areas.find(a => a.nameAr === areaName);
+            if (area) areaId = area.id;
+        }
+        
+        if (areaId) {
+            // Update area title
+            const area = websiteData.areas.find(a => a.id === areaId);
+            const areaBookingDesc = document.getElementById('areaBookingDesc');
+            
+            if (currentLang === 'en') {
+                areaBookingTitle.textContent = `Accommodation Options in ${area.nameEn}`;
+                areaBookingDesc.textContent = 'Choose your preferred accommodation type';
+            } else {
+                areaBookingTitle.textContent = `خيارات الإقامة في ${area.nameAr}`;
+                areaBookingDesc.textContent = 'اختر نوع الإقامة المفضل لديك';
+            }
+            
+            // Update accommodation options
+            populateAccommodationOptions(areaId);
+        }
+    }
+}
+
+// Event listeners for booking links
+document.getElementById('heroBookBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    showBookingPage();
+});
+
+document.getElementById('ctaBookBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    showBookingPage();
+});
+
+document.getElementById('bookingLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    showBookingPage();
+});
+
+document.getElementById('backToHome').addEventListener('click', function(e) {
+    e.preventDefault();
+    showHomePage();
+});
+
+// Initialize content language
+updateContentLanguage();

@@ -1,0 +1,3636 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cairo Elite Hospitality | إعادة تصور الضيافة الفاخرة</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<style>
+:root {
+--primary-color: #c19a6b;
+--secondary-color: #1a1a1a;
+--light-color: #f8f5f0;
+--text-dark: #333;
+--text-light: #777;
+--success-color: #28a745;
+--warning-color: #ffc107;
+--danger-color: #dc3545;
+--info-color: #17a2b8;
+--transition: all 0.3s ease;
+--shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+--border-radius: 8px;
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Montserrat', sans-serif;
+color: var(--text-dark);
+line-height: 1.6;
+overflow-x: hidden;
+background-color: #fff;
+}
+
+body.rtl {
+font-family: 'Cairo', sans-serif;
+direction: rtl;
+}
+
+.container {
+width: 90%;
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 15px;
+}
+
+/* Header Styles */
+header {
+background-color: #fff;
+box-shadow: var(--shadow);
+position: fixed;
+width: 100%;
+top: 0;
+z-index: 1000;
+}
+
+.header-container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 20px 0;
+}
+
+.logo {
+font-size: 24px;
+font-weight: 700;
+color: var(--secondary-color);
+text-decoration: none;
+display: flex;
+align-items: center;
+}
+
+.logo span {
+color: var(--primary-color);
+}
+
+.logo i {
+margin-right: 10px;
+color: var(--primary-color);
+}
+
+body.rtl .logo i {
+margin-right: 0;
+margin-left: 10px;
+}
+
+nav ul {
+display: flex;
+list-style: none;
+}
+
+nav li {
+margin-left: 30px;
+}
+
+body.rtl nav li {
+margin-left: 0;
+margin-right: 30px;
+}
+
+nav a {
+text-decoration: none;
+color: var(--secondary-color);
+font-weight: 500;
+transition: var(--transition);
+font-size: 16px;
+}
+
+nav a:hover {
+color: var(--primary-color);
+}
+
+.language-toggle {
+display: flex;
+align-items: center;
+margin-left: 30px;
+}
+
+body.rtl .language-toggle {
+margin-left: 0;
+margin-right: 30px;
+}
+
+.lang-btn {
+background: none;
+border: 1px solid #ddd;
+padding: 8px 15px;
+border-radius: 20px;
+cursor: pointer;
+transition: var(--transition);
+font-weight: 500;
+display: flex;
+align-items: center;
+}
+
+.lang-btn:hover {
+border-color: var(--primary-color);
+color: var(--primary-color);
+}
+
+.lang-btn i {
+margin-right: 5px;
+}
+
+body.rtl .lang-btn i {
+margin-right: 0;
+margin-left: 5px;
+}
+
+.mobile-menu-btn {
+display: none;
+font-size: 24px;
+cursor: pointer;
+color: var(--secondary-color);
+}
+
+/* Customer Service Floating Button */
+.customer-service-btn {
+position: fixed;
+bottom: 30px;
+right: 30px;
+background-color: var(--primary-color);
+color: white;
+width: 60px;
+height: 60px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 24px;
+cursor: pointer;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+z-index: 1000;
+transition: var(--transition);
+}
+
+body.rtl .customer-service-btn {
+right: auto;
+left: 30px;
+}
+
+.customer-service-btn:hover {
+transform: scale(1.1);
+box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Customer Service Modal */
+.customer-service-modal {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.8);
+display: none;
+justify-content: center;
+align-items: center;
+z-index: 2000;
+padding: 20px;
+}
+
+.customer-service-modal.active {
+display: flex;
+}
+
+.service-modal-content {
+background-color: white;
+border-radius: var(--border-radius);
+width: 100%;
+max-width: 400px;
+position: relative;
+}
+
+.service-modal-header {
+padding: 25px;
+background-color: var(--secondary-color);
+color: white;
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.service-modal-header h3 {
+margin: 0;
+font-size: 1.5rem;
+}
+
+.close-service-modal {
+background: none;
+border: none;
+color: white;
+font-size: 1.5rem;
+cursor: pointer;
+width: 40px;
+height: 40px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 50%;
+transition: var(--transition);
+}
+
+.close-service-modal:hover {
+background-color: rgba(255, 255, 255, 0.1);
+}
+
+.service-modal-body {
+padding: 30px;
+}
+
+.service-options {
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+
+.service-option {
+display: flex;
+align-items: center;
+gap: 20px;
+padding: 20px;
+border: 2px solid #eee;
+border-radius: var(--border-radius);
+cursor: pointer;
+transition: var(--transition);
+}
+
+.service-option:hover {
+border-color: var(--primary-color);
+background-color: rgba(193, 154, 107, 0.05);
+}
+
+.service-option-icon {
+width: 50px;
+height: 50px;
+border-radius: 50%;
+background-color: var(--primary-color);
+display: flex;
+align-items: center;
+justify-content: center;
+color: white;
+font-size: 1.5rem;
+}
+
+.service-option-content {
+flex: 1;
+}
+
+.service-option-content h4 {
+margin-bottom: 5px;
+color: var(--secondary-color);
+}
+
+.service-option-content p {
+color: var(--text-light);
+font-size: 0.9rem;
+}
+
+/* Hero Section */
+.hero {
+height: 100vh;
+background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+background-size: cover;
+background-position: center;
+display: flex;
+align-items: center;
+color: #fff;
+text-align: center;
+margin-top: 80px;
+}
+
+.hero-content {
+max-width: 800px;
+margin: 0 auto;
+padding: 20px;
+}
+
+.hero h1 {
+font-size: 3.5rem;
+margin-bottom: 20px;
+font-weight: 700;
+line-height: 1.2;
+}
+
+.hero p {
+font-size: 1.2rem;
+margin-bottom: 30px;
+opacity: 0.9;
+}
+
+.hero-btns {
+display: flex;
+justify-content: center;
+gap: 20px;
+margin-top: 30px;
+}
+
+.btn {
+padding: 15px 30px;
+border-radius: var(--border-radius);
+text-decoration: none;
+font-weight: 600;
+transition: var(--transition);
+display: inline-block;
+border: 2px solid transparent;
+cursor: pointer;
+text-align: center;
+}
+
+.btn-primary {
+background-color: var(--primary-color);
+color: white;
+}
+
+.btn-primary:hover {
+background-color: transparent;
+border-color: var(--primary-color);
+color: var(--primary-color);
+}
+
+.btn-outline {
+background-color: transparent;
+border: 2px solid white;
+color: white;
+}
+
+.btn-outline:hover {
+background-color: white;
+color: var(--secondary-color);
+}
+
+.btn-secondary {
+background-color: #333;
+color: white;
+}
+
+.btn-secondary:hover {
+background-color: #555;
+}
+
+.btn-info {
+background-color: var(--info-color);
+color: white;
+}
+
+.btn-info:hover {
+background-color: #138496;
+}
+
+.btn-warning {
+background-color: var(--warning-color);
+color: #212529;
+}
+
+.btn-warning:hover {
+background-color: #e0a800;
+}
+
+/* About Section */
+.section {
+padding: 100px 0;
+}
+
+.section-title {
+text-align: center;
+margin-bottom: 60px;
+}
+
+.section-title h2 {
+font-size: 2.5rem;
+color: var(--secondary-color);
+margin-bottom: 15px;
+position: relative;
+display: inline-block;
+}
+
+.section-title h2::after {
+content: '';
+position: absolute;
+width: 70px;
+height: 3px;
+background-color: var(--primary-color);
+bottom: -10px;
+left: 50%;
+transform: translateX(-50%);
+}
+
+body.rtl .section-title h2::after {
+left: auto;
+right: 50%;
+transform: translateX(50%);
+}
+
+.section-title p {
+color: var(--text-light);
+max-width: 700px;
+margin: 0 auto;
+}
+
+.about-content {
+display: flex;
+align-items: center;
+gap: 50px;
+}
+
+.about-text {
+flex: 1;
+}
+
+.about-text h3 {
+font-size: 1.8rem;
+margin-bottom: 20px;
+color: var(--secondary-color);
+}
+
+.about-text p {
+margin-bottom: 20px;
+color: var(--text-light);
+}
+
+.about-image {
+flex: 1;
+border-radius: var(--border-radius);
+overflow: hidden;
+box-shadow: var(--shadow);
+}
+
+.about-image img {
+width: 100%;
+height: auto;
+display: block;
+transition: var(--transition);
+}
+
+.about-image:hover img {
+transform: scale(1.05);
+}
+
+/* Services Section */
+.services {
+background-color: var(--light-color);
+}
+
+.services-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+gap: 30px;
+}
+
+.service-card {
+background-color: white;
+border-radius: var(--border-radius);
+padding: 40px 30px;
+text-align: center;
+box-shadow: var(--shadow);
+transition: var(--transition);
+}
+
+.service-card:hover {
+transform: translateY(-10px);
+}
+
+.service-icon {
+font-size: 2.5rem;
+color: var(--primary-color);
+margin-bottom: 20px;
+}
+
+.service-card h3 {
+font-size: 1.5rem;
+margin-bottom: 15px;
+color: var(--secondary-color);
+}
+
+.service-card p {
+color: var(--text-light);
+}
+
+/* Team Section */
+.team-members {
+display: flex;
+justify-content: center;
+gap: 40px;
+flex-wrap: wrap;
+}
+
+.team-member {
+text-align: center;
+max-width: 250px;
+}
+
+.member-image {
+width: 200px;
+height: 200px;
+border-radius: 50%;
+overflow: hidden;
+margin: 0 auto 20px;
+border: 5px solid var(--light-color);
+}
+
+.member-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.team-member h4 {
+font-size: 1.3rem;
+margin-bottom: 5px;
+color: var(--secondary-color);
+}
+
+.team-member p {
+color: var(--primary-color);
+font-weight: 500;
+}
+
+/* Booking Areas Section */
+.booking-areas {
+padding: 80px 0;
+background-color: #f9f9f9;
+}
+
+.areas-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 30px;
+margin-top: 40px;
+}
+
+@media (min-width: 768px) {
+.areas-grid {
+grid-template-columns: repeat(4, 1fr);
+}
+}
+
+.area-card {
+background-color: white;
+border-radius: var(--border-radius);
+overflow: hidden;
+box-shadow: var(--shadow);
+transition: var(--transition);
+text-align: center;
+cursor: pointer;
+}
+
+.area-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.area-image {
+height: 200px;
+overflow: hidden;
+}
+
+.area-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: var(--transition);
+}
+
+.area-card:hover .area-image img {
+transform: scale(1.1);
+}
+
+.area-content {
+padding: 25px 20px;
+}
+
+.area-content h3 {
+font-size: 1.4rem;
+margin-bottom: 10px;
+color: var(--secondary-color);
+}
+
+.area-content p {
+color: var(--text-light);
+font-size: 0.95rem;
+}
+
+/* Booking Page Styles */
+.booking-page {
+display: none;
+padding: 120px 0 80px;
+}
+
+.booking-page.active {
+display: block;
+}
+
+.booking-header {
+text-align: center;
+margin-bottom: 50px;
+}
+
+.back-to-areas {
+display: inline-flex;
+align-items: center;
+margin-bottom: 20px;
+color: var(--primary-color);
+text-decoration: none;
+font-weight: 500;
+transition: var(--transition);
+}
+
+.back-to-areas:hover {
+text-decoration: underline;
+}
+
+.back-to-areas i {
+margin-right: 8px;
+}
+
+body.rtl .back-to-areas i {
+margin-right: 0;
+margin-left: 8px;
+}
+
+.accommodation-options {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+gap: 40px;
+margin-top: 50px;
+}
+
+.option-card {
+background-color: white;
+border-radius: var(--border-radius);
+overflow: hidden;
+box-shadow: var(--shadow);
+transition: var(--transition);
+display: flex;
+flex-direction: column;
+cursor: pointer;
+}
+
+.option-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.option-image {
+height: 250px;
+overflow: hidden;
+position: relative;
+}
+
+.option-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: var(--transition);
+}
+
+.option-card:hover .option-image img {
+transform: scale(1.05);
+}
+
+.virtual-badge {
+position: absolute;
+top: 15px;
+right: 15px;
+background-color: rgba(0, 0, 0, 0.7);
+color: white;
+padding: 5px 10px;
+border-radius: 20px;
+font-size: 0.8rem;
+display: flex;
+align-items: center;
+gap: 5px;
+z-index: 2;
+}
+
+.view-count-badge {
+position: absolute;
+top: 15px;
+left: 15px;
+background-color: rgba(255, 69, 0, 0.9);
+color: white;
+padding: 8px 12px;
+border-radius: 20px;
+font-size: 0.9rem;
+display: flex;
+align-items: center;
+gap: 6px;
+z-index: 2;
+font-weight: 600;
+box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+body.rtl .view-count-badge {
+left: auto;
+right: 15px;
+}
+
+body.rtl .virtual-badge {
+right: auto;
+left: 15px;
+}
+
+.option-content {
+padding: 30px;
+flex-grow: 1;
+display: flex;
+flex-direction: column;
+}
+
+.option-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 15px;
+}
+
+.option-header h3 {
+font-size: 1.6rem;
+color: var(--secondary-color);
+}
+
+.price-container {
+display: flex;
+flex-direction: column;
+align-items: flex-end;
+}
+
+.price {
+font-size: 1.8rem;
+font-weight: 700;
+color: var(--primary-color);
+}
+
+.price span {
+font-size: 1rem;
+color: var(--text-light);
+}
+
+.price-history-badge {
+font-size: 0.8rem;
+padding: 3px 8px;
+border-radius: 12px;
+margin-top: 5px;
+display: inline-block;
+}
+
+.price-good {
+background-color: rgba(40, 167, 69, 0.1);
+color: var(--success-color);
+border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.price-high {
+background-color: rgba(220, 53, 69, 0.1);
+color: var(--danger-color);
+border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+.price-average {
+background-color: rgba(255, 193, 7, 0.1);
+color: var(--warning-color);
+border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.option-features {
+margin: 20px 0;
+flex-grow: 1;
+}
+
+.feature {
+display: flex;
+align-items: center;
+margin-bottom: 10px;
+}
+
+.feature i {
+color: var(--primary-color);
+margin-right: 10px;
+width: 20px;
+}
+
+body.rtl .feature i {
+margin-right: 0;
+margin-left: 10px;
+}
+
+.option-actions {
+display: flex;
+gap: 10px;
+margin-top: 20px;
+}
+
+.option-actions .btn {
+flex: 1;
+}
+
+/* Booking Details Modal */
+.booking-details-modal {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.8);
+display: none;
+justify-content: center;
+align-items: center;
+z-index: 2000;
+padding: 20px;
+}
+
+.booking-details-modal.active {
+display: flex;
+}
+
+.booking-details-content {
+background-color: white;
+border-radius: var(--border-radius);
+width: 100%;
+max-width: 600px;
+max-height: 90vh;
+overflow-y: auto;
+position: relative;
+}
+
+.booking-details-header {
+padding: 25px;
+background-color: var(--secondary-color);
+color: white;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.booking-details-header h3 {
+margin: 0;
+font-size: 1.5rem;
+}
+
+.close-booking-details {
+background: none;
+border: none;
+color: white;
+font-size: 1.5rem;
+cursor: pointer;
+width: 40px;
+height: 40px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 50%;
+transition: var(--transition);
+}
+
+.close-booking-details:hover {
+background-color: rgba(255, 255, 255, 0.1);
+}
+
+.booking-details-body {
+padding: 30px;
+}
+
+.accommodation-summary {
+display: flex;
+gap: 20px;
+margin-bottom: 30px;
+padding-bottom: 20px;
+border-bottom: 1px solid #eee;
+}
+
+.accommodation-image {
+width: 150px;
+height: 150px;
+border-radius: var(--border-radius);
+overflow: hidden;
+flex-shrink: 0;
+}
+
+.accommodation-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.accommodation-info {
+flex: 1;
+}
+
+.accommodation-info h4 {
+font-size: 1.4rem;
+margin-bottom: 10px;
+color: var(--secondary-color);
+}
+
+.accommodation-price {
+font-size: 1.5rem;
+font-weight: 700;
+color: var(--primary-color);
+margin-top: 10px;
+}
+
+.booking-form {
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+
+.form-group {
+margin-bottom: 15px;
+}
+
+.form-group label {
+display: block;
+margin-bottom: 8px;
+font-weight: 500;
+color: var(--secondary-color);
+}
+
+.form-control {
+width: 100%;
+padding: 12px 15px;
+border: 1px solid #ddd;
+border-radius: var(--border-radius);
+font-size: 1rem;
+transition: var(--transition);
+}
+
+.form-control:focus {
+outline: none;
+border-color: var(--primary-color);
+box-shadow: 0 0 0 3px rgba(193, 154, 107, 0.1);
+}
+
+.nights-selector {
+display: flex;
+align-items: center;
+gap: 15px;
+}
+
+.nights-control {
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+.nights-btn {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+border: 2px solid var(--primary-color);
+background: white;
+color: var(--primary-color);
+font-size: 1.2rem;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: var(--transition);
+}
+
+.nights-btn:hover {
+background-color: var(--primary-color);
+color: white;
+}
+
+.nights-value {
+font-size: 1.5rem;
+font-weight: 600;
+min-width: 40px;
+text-align: center;
+}
+
+.total-price-display {
+background-color: #f8f9fa;
+padding: 20px;
+border-radius: var(--border-radius);
+margin: 20px 0;
+text-align: center;
+}
+
+.total-price-display h4 {
+font-size: 1.2rem;
+margin-bottom: 10px;
+color: var(--secondary-color);
+}
+
+.total-price {
+font-size: 2rem;
+font-weight: 700;
+color: var(--primary-color);
+}
+
+.price-breakdown {
+font-size: 0.9rem;
+color: var(--text-light);
+margin-top: 10px;
+}
+
+/* Price Timeline Styles */
+.price-timeline-container {
+background-color: white;
+border-radius: var(--border-radius);
+padding: 30px;
+margin: 40px 0;
+box-shadow: var(--shadow);
+}
+
+.price-timeline-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 20px;
+}
+
+.price-timeline-header h3 {
+font-size: 1.5rem;
+color: var(--secondary-color);
+}
+
+.price-comparison {
+font-size: 1rem;
+color: var(--text-light);
+}
+
+.price-timeline-graph {
+height: 100px;
+margin: 30px 0;
+position: relative;
+border-bottom: 2px solid #eee;
+}
+
+.timeline-bar {
+position: absolute;
+bottom: 0;
+width: 20px;
+border-radius: 4px 4px 0 0;
+transition: var(--transition);
+cursor: pointer;
+}
+
+.timeline-bar:hover {
+opacity: 0.8;
+}
+
+.timeline-bar-low {
+background-color: var(--success-color);
+}
+
+.timeline-bar-medium {
+background-color: var(--warning-color);
+}
+
+.timeline-bar-high {
+background-color: var(--danger-color);
+}
+
+.timeline-labels {
+display: flex;
+justify-content: space-between;
+margin-top: 10px;
+font-size: 0.8rem;
+color: var(--text-light);
+}
+
+.smart-messages {
+display: flex;
+flex-wrap: wrap;
+gap: 15px;
+margin-top: 30px;
+}
+
+.smart-message {
+background-color: #f8f9fa;
+padding: 15px;
+border-radius: var(--border-radius);
+flex: 1;
+min-width: 200px;
+border-left: 4px solid var(--info-color);
+}
+
+.smart-message.warning {
+border-left-color: var(--warning-color);
+}
+
+.smart-message.success {
+border-left-color: var(--success-color);
+}
+
+.smart-message h4 {
+font-size: 1rem;
+margin-bottom: 8px;
+color: var(--secondary-color);
+}
+
+.smart-message p {
+font-size: 0.9rem;
+color: var(--text-light);
+}
+
+/* Ride Booking Modal - FIXED */
+.ride-booking-modal {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.8);
+display: none;
+justify-content: center;
+align-items: center;
+z-index: 2000;
+padding: 20px;
+}
+
+.ride-booking-modal.active {
+display: flex;
+}
+
+.ride-modal-content {
+background-color: white;
+border-radius: var(--border-radius);
+width: 100%;
+max-width: 600px;
+max-height: 90vh;
+overflow-y: auto;
+position: relative;
+}
+
+.ride-modal-header {
+padding: 25px;
+background-color: var(--secondary-color);
+color: white;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.ride-modal-header h3 {
+margin: 0;
+font-size: 1.5rem;
+}
+
+.close-ride-modal {
+background: none;
+border: none;
+color: white;
+font-size: 1.5rem;
+cursor: pointer;
+width: 40px;
+height: 40px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 50%;
+transition: var(--transition);
+}
+
+.close-ride-modal:hover {
+background-color: rgba(255, 255, 255, 0.1);
+}
+
+.ride-modal-body {
+padding: 30px;
+}
+
+.ride-options {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 20px;
+margin: 25px 0;
+}
+
+.ride-option-card {
+border: 2px solid #eee;
+border-radius: var(--border-radius);
+padding: 25px;
+text-align: center;
+cursor: pointer;
+transition: var(--transition);
+}
+
+.ride-option-card:hover {
+border-color: var(--primary-color);
+transform: translateY(-5px);
+}
+
+.ride-option-card.selected {
+border-color: var(--primary-color);
+background-color: rgba(193, 154, 107, 0.05);
+}
+
+.ride-option-icon {
+font-size: 2.5rem;
+color: var(--primary-color);
+margin-bottom: 15px;
+}
+
+.ride-option-card h4 {
+font-size: 1.3rem;
+margin-bottom: 10px;
+color: var(--secondary-color);
+}
+
+.ride-option-card p {
+color: var(--text-light);
+margin-bottom: 15px;
+}
+
+.ride-price {
+font-size: 1.5rem;
+font-weight: 700;
+color: var(--primary-color);
+}
+
+.ride-price span {
+font-size: 1rem;
+color: var(--text-light);
+}
+
+.form-row {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 20px;
+}
+
+/* Offline Maps Modal - FIXED */
+.maps-modal {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.8);
+display: none;
+justify-content: center;
+align-items: center;
+z-index: 2000;
+padding: 20px;
+}
+
+.maps-modal.active {
+display: flex;
+}
+
+.maps-modal-content {
+background-color: white;
+border-radius: var(--border-radius);
+width: 100%;
+max-width: 1000px;
+max-height: 90vh;
+overflow: hidden;
+position: relative;
+display: flex;
+flex-direction: column;
+}
+
+.maps-modal-header {
+padding: 25px;
+background-color: var(--secondary-color);
+color: white;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.maps-modal-header h3 {
+margin: 0;
+font-size: 1.5rem;
+}
+
+.close-maps-modal {
+background: none;
+border: none;
+color: white;
+font-size: 1.5rem;
+cursor: pointer;
+width: 40px;
+height: 40px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 50%;
+transition: var(--transition);
+}
+
+.close-maps-modal:hover {
+background-color: rgba(255, 255, 255, 0.1);
+}
+
+.maps-modal-body {
+display: flex;
+flex: 1;
+min-height: 500px;
+}
+
+.maps-sidebar {
+width: 300px;
+border-right: 1px solid #eee;
+padding: 25px;
+overflow-y: auto;
+}
+
+.map-categories {
+display: flex;
+flex-direction: column;
+gap: 10px;
+margin-bottom: 25px;
+}
+
+.map-category {
+padding: 15px;
+border: 1px solid #eee;
+border-radius: var(--border-radius);
+background: white;
+cursor: pointer;
+transition: var(--transition);
+display: flex;
+align-items: center;
+gap: 12px;
+font-size: 0.9rem;
+}
+
+.map-category:hover {
+border-color: var(--primary-color);
+color: var(--primary-color);
+}
+
+.map-category.active {
+border-color: var(--primary-color);
+background-color: rgba(193, 154, 107, 0.05);
+color: var(--primary-color);
+}
+
+.map-category-icon {
+width: 30px;
+height: 30px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+color: white;
+font-size: 0.8rem;
+}
+
+.map-category.cafe .map-category-icon { background-color: #8B4513; }
+.map-category.restaurant .map-category-icon { background-color: #DC143C; }
+.map-category.museum .map-category-icon { background-color: #228B22; }
+.map-category.mall .map-category-icon { background-color: #4169E1; }
+.map-category.pharmacy .map-category-icon { background-color: #32CD32; }
+.map-category.hospital .map-category-icon { background-color: #FF0000; }
+.map-category.gym .map-category-icon { background-color: #FF4500; }
+.map-category.workspace .map-category-icon { background-color: #FF8C00; }
+.map-category.all .map-category-icon { background-color: #6c757d; }
+
+.map-locations {
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+
+.map-location-item {
+padding: 15px;
+border: 1px solid #eee;
+border-radius: var(--border-radius);
+cursor: pointer;
+transition: var(--transition);
+}
+
+.map-location-item:hover {
+border-color: var(--primary-color);
+background-color: rgba(193, 154, 107, 0.05);
+}
+
+.map-location-header {
+display: flex;
+align-items: center;
+gap: 10px;
+margin-bottom: 8px;
+}
+
+.map-location-icon {
+width: 30px;
+height: 30px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+color: white;
+font-size: 0.8rem;
+}
+
+.map-location-item.cafe .map-location-icon { background-color: #8B4513; }
+.map-location-item.restaurant .map-location-icon { background-color: #DC143C; }
+.map-location-item.museum .map-location-icon { background-color: #228B22; }
+.map-location-item.mall .map-location-icon { background-color: #4169E1; }
+.map-location-item.pharmacy .map-location-icon { background-color: #32CD32; }
+.map-location-item.hospital .map-location-icon { background-color: #FF0000; }
+.map-location-item.gym .map-location-icon { background-color: #FF4500; }
+.map-location-item.workspace .map-location-icon { background-color: #FF8C00; }
+
+.map-location-item h4 {
+font-size: 1rem;
+margin: 0;
+color: var(--secondary-color);
+}
+
+.map-location-distance {
+font-size: 0.8rem;
+color: var(--text-light);
+margin-top: 5px;
+}
+
+.map-container {
+flex: 1;
+padding: 25px;
+background-color: #f8f9fa;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+}
+
+.map-placeholder {
+max-width: 500px;
+}
+
+.map-placeholder i {
+font-size: 5rem;
+color: var(--primary-color);
+margin-bottom: 20px;
+}
+
+.map-placeholder h4 {
+font-size: 1.5rem;
+margin-bottom: 15px;
+color: var(--secondary-color);
+}
+
+.map-placeholder p {
+color: var(--text-light);
+margin-bottom: 25px;
+}
+
+.download-map-btn {
+display: flex;
+align-items: center;
+gap: 10px;
+padding: 12px 25px;
+}
+
+/* Virtual Walkthrough Modal - FIXED */
+.modal-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.8);
+display: none;
+justify-content: center;
+align-items: center;
+z-index: 2000;
+padding: 20px;
+}
+
+.modal-overlay.active {
+display: flex;
+}
+
+.modal-content {
+background-color: white;
+border-radius: var(--border-radius);
+width: 100%;
+max-width: 900px;
+max-height: 90vh;
+overflow: hidden;
+position: relative;
+}
+
+.modal-header {
+padding: 20px;
+background-color: var(--secondary-color);
+color: white;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.modal-header h3 {
+margin: 0;
+font-size: 1.5rem;
+}
+
+.close-modal {
+background: none;
+border: none;
+color: white;
+font-size: 1.5rem;
+cursor: pointer;
+width: 40px;
+height: 40px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 50%;
+transition: var(--transition);
+}
+
+.close-modal:hover {
+background-color: rgba(255, 255, 255, 0.1);
+}
+
+.modal-body {
+padding: 0;
+}
+
+.walkthrough-container {
+position: relative;
+width: 100%;
+height: 500px;
+background-color: #f5f5f5;
+overflow: hidden;
+}
+
+.walkthrough-placeholder {
+width: 100%;
+height: 100%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+color: var(--text-light);
+padding: 20px;
+text-align: center;
+transition: transform 0.5s ease;
+}
+
+.walkthrough-placeholder i {
+font-size: 4rem;
+margin-bottom: 20px;
+color: var(--primary-color);
+}
+
+.walkthrough-placeholder h4 {
+font-size: 1.5rem;
+margin-bottom: 10px;
+color: var(--secondary-color);
+}
+
+.walkthrough-placeholder p {
+max-width: 500px;
+}
+
+.walkthrough-controls {
+position: absolute;
+bottom: 20px;
+left: 50%;
+transform: translateX(-50%);
+display: flex;
+gap: 10px;
+z-index: 10;
+}
+
+.walkthrough-controls button {
+background-color: rgba(0, 0, 0, 0.7);
+color: white;
+border: none;
+width: 40px;
+height: 40px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+transition: var(--transition);
+}
+
+.walkthrough-controls button:hover {
+background-color: var(--primary-color);
+}
+
+/* CTA Section */
+.cta {
+background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+background-size: cover;
+background-position: center;
+color: white;
+text-align: center;
+padding: 100px 0;
+}
+
+.cta h2 {
+font-size: 2.5rem;
+margin-bottom: 20px;
+}
+
+.cta p {
+font-size: 1.2rem;
+max-width: 700px;
+margin: 0 auto 30px;
+opacity: 0.9;
+}
+
+/* Footer */
+footer {
+background-color: var(--secondary-color);
+color: white;
+padding: 70px 0 20px;
+}
+
+.footer-content {
+display: flex;
+justify-content: space-between;
+flex-wrap: wrap;
+margin-bottom: 50px;
+}
+
+.footer-column {
+flex: 1;
+min-width: 250px;
+margin-bottom: 30px;
+padding-right: 20px;
+}
+
+body.rtl .footer-column {
+padding-right: 0;
+padding-left: 20px;
+}
+
+.footer-column h3 {
+font-size: 1.3rem;
+margin-bottom: 20px;
+color: var(--primary-color);
+}
+
+.footer-column p, .footer-column a {
+color: #aaa;
+margin-bottom: 10px;
+display: block;
+text-decoration: none;
+transition: var(--transition);
+}
+
+.footer-column a:hover {
+color: var(--primary-color);
+}
+
+.social-icons {
+display: flex;
+gap: 15px;
+margin-top: 15px;
+}
+
+.social-icons a {
+font-size: 1.2rem;
+width: 40px;
+height: 40px;
+border-radius: 50%;
+background-color: #333;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: var(--transition);
+}
+
+.social-icons a:hover {
+background-color: var(--primary-color);
+transform: translateY(-3px);
+}
+
+.copyright {
+text-align: center;
+padding-top: 20px;
+border-top: 1px solid #444;
+color: #aaa;
+font-size: 0.9rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+.hero h1 {
+font-size: 2.8rem;
+}
+
+.about-content {
+flex-direction: column;
+}
+
+.about-text, .about-image {
+width: 100%;
+}
+
+.accommodation-options {
+grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.walkthrough-container {
+height: 400px;
+}
+
+.maps-modal-body {
+flex-direction: column;
+}
+
+.maps-sidebar {
+width: 100%;
+border-right: none;
+border-bottom: 1px solid #eee;
+max-height: 300px;
+}
+
+.customer-service-btn {
+bottom: 20px;
+right: 20px;
+}
+
+body.rtl .customer-service-btn {
+right: auto;
+left: 20px;
+}
+}
+
+@media (max-width: 768px) {
+.mobile-menu-btn {
+display: block;
+}
+
+nav {
+position: fixed;
+top: 80px;
+left: -100%;
+width: 100%;
+background-color: white;
+box-shadow: var(--shadow);
+transition: var(--transition);
+padding: 20px;
+}
+
+body.rtl nav {
+left: auto;
+right: -100%;
+}
+
+nav.active {
+left: 0;
+}
+
+body.rtl nav.active {
+right: 0;
+}
+
+nav ul {
+flex-direction: column;
+}
+
+nav li {
+margin: 0 0 15px 0;
+}
+
+body.rtl nav li {
+margin: 0 0 15px 0;
+}
+
+.language-toggle {
+margin-left: 0;
+}
+
+body.rtl .language-toggle {
+margin-right: 0;
+}
+
+.hero h1 {
+font-size: 2.2rem;
+}
+
+.hero p {
+font-size: 1rem;
+}
+
+.hero-btns {
+flex-direction: column;
+align-items: center;
+}
+
+.btn {
+width: 100%;
+max-width: 300px;
+text-align: center;
+}
+
+.section {
+padding: 70px 0;
+}
+
+.section-title h2 {
+font-size: 2rem;
+}
+
+.areas-grid {
+grid-template-columns: 1fr;
+}
+
+.accommodation-options {
+grid-template-columns: 1fr;
+}
+
+.option-actions {
+flex-direction: column;
+}
+
+.walkthrough-container {
+height: 300px;
+}
+
+.ride-options {
+grid-template-columns: 1fr;
+}
+
+.form-row {
+grid-template-columns: 1fr;
+}
+
+.price-timeline-header {
+flex-direction: column;
+align-items: flex-start;
+gap: 10px;
+}
+
+.accommodation-summary {
+flex-direction: column;
+align-items: center;
+text-align: center;
+}
+
+.accommodation-image {
+width: 100%;
+max-width: 300px;
+height: 200px;
+}
+}
+
+@media (max-width: 576px) {
+.hero h1 {
+font-size: 1.8rem;
+}
+
+.section-title h2 {
+font-size: 1.8rem;
+}
+
+.footer-column {
+min-width: 100%;
+}
+
+.modal-content {
+max-height: 80vh;
+}
+
+.walkthrough-container {
+height: 250px;
+}
+
+.smart-messages {
+flex-direction: column;
+}
+
+.customer-service-btn {
+width: 50px;
+height: 50px;
+font-size: 20px;
+bottom: 15px;
+right: 15px;
+}
+
+body.rtl .customer-service-btn {
+right: auto;
+left: 15px;
+}
+}
+</style>
+</head>
+<body class="ltr">
+<!-- Header -->
+<header>
+<div class="container header-container">
+<a href="#" class="logo">
+<i class="fas fa-crown"></i>
+<span>Cairo Elite</span>Hospitality
+</a>
+<div class="mobile-menu-btn" id="mobileMenuBtn">
+<i class="fas fa-bars"></i>
+</div>
+<nav id="mainNav">
+<ul>
+<li><a href="#home" class="nav-link">Home</a></li>
+<li><a href="#about" class="nav-link">About</a></li>
+<li><a href="#services" class="nav-link">Services</a></li>
+<li><a href="#team" class="nav-link">Our Team</a></li>
+<li><a href="#booking" class="nav-link" id="bookingLink">Book Now</a></li>
+</ul>
+</nav>
+<div class="language-toggle">
+<button class="lang-btn" id="languageToggle">
+<i class="fas fa-globe"></i>
+<span class="lang-text">العربية</span>
+</button>
+</div>
+</div>
+</header>
+
+<!-- Customer Service Floating Button -->
+<div class="customer-service-btn" id="customerServiceBtn">
+<i class="fas fa-headset"></i>
+</div>
+
+<!-- Customer Service Modal -->
+<div class="customer-service-modal" id="customerServiceModal">
+<div class="service-modal-content">
+<div class="service-modal-header">
+<h3 id="serviceModalTitle" data-en="Customer Service" data-ar="خدمة العملاء">Customer Service</h3>
+<button class="close-service-modal" id="closeServiceModal">
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="service-modal-body">
+<div class="service-options">
+<div class="service-option" id="chatOption">
+<div class="service-option-icon">
+<i class="fas fa-comments"></i>
+</div>
+<div class="service-option-content">
+<h4 data-en="Live Chat" data-ar="الدردشة المباشرة">Live Chat</h4>
+<p data-en="Chat with our customer service team 24/7" data-ar="دردش مع فريق خدمة العملاء لدينا على مدار الساعة">Chat with our customer service team 24/7</p>
+</div>
+</div>
+<div class="service-option" id="callOption">
+<div class="service-option-icon">
+<i class="fas fa-phone"></i>
+</div>
+<div class="service-option-content">
+<h4 data-en="Phone Call" data-ar="مكالمة هاتفية">Phone Call</h4>
+<p data-en="Call us directly for immediate assistance" data-ar="اتصل بنا مباشرة للحصول على مساعدة فورية">Call us directly for immediate assistance</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Booking Details Modal -->
+<div class="booking-details-modal" id="bookingDetailsModal">
+<div class="booking-details-content">
+<div class="booking-details-header">
+<h3 id="bookingModalTitle" data-en="Book Your Stay" data-ar="احجز إقامتك">Book Your Stay</h3>
+<button class="close-booking-details" id="closeBookingDetails">
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="booking-details-body">
+<div class="accommodation-summary" id="accommodationSummary">
+<!-- Accommodation details will be populated by JavaScript -->
+</div>
+
+<div class="booking-form">
+<div class="form-group">
+<label for="checkInDate" data-en="Check-in Date" data-ar="تاريخ الوصول">Check-in Date</label>
+<input type="text" id="checkInDate" class="form-control datepicker" placeholder="Select check-in date">
+</div>
+
+<div class="form-group">
+<label data-en="Number of Nights" data-ar="عدد الليالي">Number of Nights</label>
+<div class="nights-selector">
+<div class="nights-control">
+<button class="nights-btn" id="decreaseNights">-</button>
+<div class="nights-value" id="nightsValue">1</div>
+<button class="nights-btn" id="increaseNights">+</button>
+</div>
+<div style="flex: 1;">
+<span data-en="night(s)" data-ar="ليلة (ليالي)">night(s)</span>
+</div>
+</div>
+</div>
+
+<div class="total-price-display">
+<h4 data-en="Total Price" data-ar="السعر الإجمالي">Total Price</h4>
+<div class="total-price" id="totalPrice">$10</div>
+<div class="price-breakdown" id="priceBreakdown">$10 × 1 night</div>
+</div>
+
+<div class="form-group">
+<label for="guestName" data-en="Full Name" data-ar="الاسم الكامل">Full Name</label>
+<input type="text" id="guestName" class="form-control" placeholder="Enter your full name">
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label for="guestEmail" data-en="Email Address" data-ar="عنوان البريد الإلكتروني">Email Address</label>
+<input type="email" id="guestEmail" class="form-control" placeholder="Enter your email">
+</div>
+<div class="form-group">
+<label for="guestPhone" data-en="Phone Number" data-ar="رقم الهاتف">Phone Number</label>
+<input type="tel" id="guestPhone" class="form-control" placeholder="Enter your phone number">
+</div>
+</div>
+
+<div class="form-group">
+<label for="specialRequests" data-en="Special Requests" data-ar="طلبات خاصة">Special Requests</label>
+<textarea id="specialRequests" class="form-control" rows="3" placeholder="Any special requirements"></textarea>
+</div>
+
+<button class="btn btn-primary" id="confirmBooking" style="width: 100%; margin-top: 20px;" data-en="Confirm Booking" data-ar="تأكيد الحجز">Confirm Booking</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Ride Booking Modal - FIXED -->
+<div class="ride-booking-modal" id="rideBookingModal">
+<div class="ride-modal-content">
+<div class="ride-modal-header">
+<h3 id="rideModalTitle" data-en="Book Luxury Transportation" data-ar="احجز وسائل النقل الفاخرة">Book Luxury Transportation</h3>
+<button class="close-ride-modal" id="closeRideModal">
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="ride-modal-body">
+<div class="form-group">
+<label for="pickupLocation" data-en="Pickup Location" data-ar="موقع الاستلام">Pickup Location</label>
+<input type="text" id="pickupLocation" class="form-control" placeholder="Enter pickup address">
+</div>
+
+<div class="form-group">
+<label for="destination" data-en="Destination" data-ar="الوجهة">Destination</label>
+<input type="text" id="destination" class="form-control" placeholder="Enter destination address">
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label for="pickupDate" data-en="Pickup Date" data-ar="تاريخ الاستلام">Pickup Date</label>
+<input type="text" id="pickupDate" class="form-control datepicker" placeholder="Select date">
+</div>
+<div class="form-group">
+<label for="pickupTime" data-en="Pickup Time" data-ar="وقت الاستلام">Pickup Time</label>
+<input type="text" id="pickupTime" class="form-control timepicker" placeholder="Select time">
+</div>
+</div>
+
+<div class="form-group">
+<label data-en="Select Vehicle Type" data-ar="اختر نوع المركبة">Select Vehicle Type</label>
+<div class="ride-options">
+<div class="ride-option-card" data-type="sedan">
+<div class="ride-option-icon">
+<i class="fas fa-car"></i>
+</div>
+<h4 data-en="Premium Sedan" data-ar="سيارة سيدان فاخرة">Premium Sedan</h4>
+<p data-en="Luxury sedan for 1-3 passengers" data-ar="سيارة سيدان فاخرة لـ 1-3 ركاب">Luxury sedan for 1-3 passengers</p>
+<div class="ride-price">$50<span data-en="/day" data-ar="/يوم">/day</span></div>
+</div>
+<div class="ride-option-card" data-type="suv">
+<div class="ride-option-icon">
+<i class="fas fa-car-side"></i>
+</div>
+<h4 data-en="Luxury SUV" data-ar="سيارة دفع رباعي فاخرة">Luxury SUV</h4>
+<p data-en="Spacious SUV for 1-5 passengers" data-ar="سيارة دفع رباعي فسيحة لـ 1-5 ركاب">Spacious SUV for 1-5 passengers</p>
+<div class="ride-price">$75<span data-en="/day" data-ar="/يوم">/day</span></div>
+</div>
+</div>
+</div>
+
+<div class="form-group">
+<label data-en="Driver Option" data-ar="خيار السائق">Driver Option</label>
+<div class="ride-options">
+<div class="ride-option-card" data-driver="with">
+<div class="ride-option-icon">
+<i class="fas fa-user-tie"></i>
+</div>
+<h4 data-en="With Driver" data-ar="مع سائق">With Driver</h4>
+<p data-en="Professional chauffeur included" data-ar="سائق محترف مدرج">Professional chauffeur included</p>
+<div class="ride-price">+$30<span data-en="/day" data-ar="/يوم">/day</span></div>
+</div>
+<div class="ride-option-card" data-driver="without">
+<div class="ride-option-icon">
+<i class="fas fa-user-slash"></i>
+</div>
+<h4 data-en="Without Driver" data-ar="بدون سائق">Without Driver</h4>
+<p data-en="Self-drive option" data-ar="خيار القيادة الذاتية">Self-drive option</p>
+<div class="ride-price" data-en="No extra cost" data-ar="لا توجد تكلفة إضافية">No extra cost</div>
+</div>
+</div>
+</div>
+
+<div class="form-group">
+<label for="rentalDuration" data-en="Rental Duration" data-ar="مدة الإيجار">Rental Duration</label>
+<select id="rentalDuration" class="form-control">
+<option value="daily" data-en="Daily" data-ar="يومي">Daily</option>
+<option value="weekly" data-en="Weekly" data-ar="أسبوعي">Weekly</option>
+<option value="monthly" data-en="Monthly" data-ar="شهري">Monthly</option>
+</select>
+</div>
+
+<div class="form-group">
+<label for="rideSpecialRequests" data-en="Special Requests" data-ar="طلبات خاصة">Special Requests</label>
+<textarea id="rideSpecialRequests" class="form-control" rows="3" placeholder="Any special requirements"></textarea>
+</div>
+
+<button class="btn btn-primary" id="confirmRideBooking" style="width: 100%;" data-en="Confirm Booking" data-ar="تأكيد الحجز">Confirm Booking</button>
+</div>
+</div>
+</div>
+
+<!-- Offline Maps Modal - FIXED -->
+<div class="maps-modal" id="mapsModal">
+<div class="maps-modal-content">
+<div class="maps-modal-header">
+<h3 id="mapsModalTitle" data-en="Area Guide & Offline Maps" data-ar="دليل المنطقة والخرائط بدون إنترنت">Area Guide & Offline Maps</h3>
+<button class="close-maps-modal" id="closeMapsModal">
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="maps-modal-body">
+<div class="maps-sidebar">
+<h4 data-en="Categories" data-ar="الفئات">Categories</h4>
+<div class="map-categories" id="mapCategories">
+<!-- Categories will be populated by JavaScript -->
+</div>
+
+<h4 style="margin-top: 30px;" data-en="Nearby Locations" data-ar="المواقع القريبة">Nearby Locations</h4>
+<div class="map-locations" id="mapLocations">
+<!-- Locations will be populated by JavaScript -->
+</div>
+</div>
+<div class="map-container">
+<div class="map-placeholder">
+<i class="fas fa-map-marked-alt"></i>
+<h4 data-en="Interactive Area Map" data-ar="خريطة المنطقة التفاعلية">Interactive Area Map</h4>
+<p data-en="This map shows all important locations around your accommodation. Filter by category to find exactly what you need. Download the offline map for navigation without internet." data-ar="تعرض هذه الخريطة جميع المواقع المهمة حول مكان إقامتك. قم بالتصفية حسب الفئة للعثور على ما تحتاجه بالضبط. قم بتنزيل الخريطة دون اتصال للتنقل بدون إنترنت.">
+This map shows all important locations around your accommodation. Filter by category to find exactly what you need. Download the offline map for navigation without internet.
+</p>
+<button class="btn btn-primary download-map-btn" id="downloadMapBtn">
+<i class="fas fa-download"></i>
+<span data-en="Download Offline Map" data-ar="تنزيل خريطة دون اتصال">Download Offline Map</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Virtual Walkthrough Modal - FIXED -->
+<div class="modal-overlay" id="virtualWalkthroughModal">
+<div class="modal-content">
+<div class="modal-header">
+<h3 id="modalTitle" data-en="Virtual Walkthrough" data-ar="جولة افتراضية 360°">Virtual Walkthrough</h3>
+<button class="close-modal" id="closeModal">
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div class="modal-body">
+<div class="walkthrough-container">
+<div class="walkthrough-placeholder" id="walkthroughPlaceholder">
+<i class="fas fa-vr-cardboard"></i>
+<h4 id="walkthroughTitle" data-en="Virtual Walkthrough Experience" data-ar="تجربة جولة افتراضية">Virtual Walkthrough Experience</h4>
+<p id="walkthroughDescription" data-en="This is a simulated 360° virtual walkthrough. In a real implementation, this would show an interactive 360° view of the selected accommodation using technologies like Matterport, 3DVista, or custom WebGL solutions." data-ar="هذه محاكاة لجولة افتراضية 360°. في التطبيق الحقيقي، سيتم عرض عرض تفاعلي 360° للإقامة المختارة باستخدام تقنيات مثل Matterport أو 3DVista أو حلول WebGL المخصصة.">
+This is a simulated 360° virtual walkthrough. In a real implementation, this would show an interactive 360° view of the selected accommodation using technologies like Matterport, 3DVista, or custom WebGL solutions.
+</p>
+<div class="walkthrough-controls">
+<button id="rotateLeft">
+<i class="fas fa-arrow-left"></i>
+</button>
+<button id="toggleAutoRotate">
+<i class="fas fa-play" id="autoRotateIcon"></i>
+</button>
+<button id="rotateRight">
+<i class="fas fa-arrow-right"></i>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Hero Section -->
+<section class="hero" id="home">
+<div class="container hero-content">
+<h1 class="hero-title" data-en="Welcome to Cairo Elite Hospitality" data-ar="مرحبًا بكم في كايرو إيليت للضيافة">Welcome to Cairo Elite Hospitality</h1>
+<p class="hero-subtitle" data-en="Where luxury hospitality is reimagined. Your stay becomes a lifestyle of excellence." data-ar="حيث تُعاد صياغة مفهوم الضيافة الفاخرة. إقامتك تتحول إلى نمط حياة من التميز">Where luxury hospitality is reimagined. Your stay becomes a lifestyle of excellence.</p>
+<div class="hero-btns">
+<a href="#booking" class="btn btn-primary" id="heroBookBtn" data-en="Book Your Stay" data-ar="احجز إقامتك">Book Your Stay</a>
+<a href="#services" class="btn btn-outline" data-en="Our Services" data-ar="خدماتنا">Our Services</a>
+</div>
+</div>
+</section>
+
+<!-- Booking Areas Section (Initially Hidden) -->
+<section class="booking-page" id="bookingPage">
+<div class="container">
+<div class="booking-header">
+<a href="#" class="back-to-areas" id="backToHome">
+<i class="fas fa-arrow-left"></i>
+<span data-en="Back to Home" data-ar="العودة للرئيسية">Back to Home</span>
+</a>
+<h2 data-en="Select Your Preferred Area" data-ar="اختر المنطقة المفضلة لديك">Select Your Preferred Area</h2>
+<p data-en="Choose from our premium locations across Cairo" data-ar="اختر من مواقعنا المتميزة في جميع أنحاء القاهرة">Choose from our premium locations across Cairo</p>
+</div>
+
+<div class="areas-grid" id="areasGrid">
+<!-- Areas will be populated by JavaScript -->
+</div>
+</div>
+</section>
+
+<!-- Area Booking Page (Initially Hidden) -->
+<section class="booking-page" id="areaBookingPage">
+<div class="container">
+<div class="booking-header">
+<a href="#" class="back-to-areas" id="backToAreas">
+<i class="fas fa-arrow-left"></i>
+<span data-en="Back to Areas" data-ar="العودة للمناطق">Back to Areas</span>
+</a>
+<h2 id="areaBookingTitle" data-en="Accommodation Options in " data-ar="خيارات الإقامة في ">Accommodation Options in </h2>
+<p id="areaBookingDesc" data-en="Choose your preferred accommodation type" data-ar="اختر نوع الإقامة المفضل لديك">Choose your preferred accommodation type</p>
+</div>
+
+<!-- Price Timeline Section -->
+<div class="price-timeline-container" id="priceTimelineContainer">
+<!-- Price timeline content remains the same -->
+</div>
+
+<div class="accommodation-options" id="accommodationOptions">
+<!-- Accommodation options will be populated by JavaScript -->
+</div>
+</div>
+</section>
+
+<!-- About Section -->
+<section class="section" id="about">
+<div class="container">
+<div class="section-title">
+<h2 data-en="About Our Vision" data-ar="حول رؤيتنا">About Our Vision</h2>
+<p data-en="Redefining luxury residential hospitality" data-ar="إعادة تعريف الضيافة السكنية الفاخرة">Redefining luxury residential hospitality</p>
+</div>
+<div class="about-content">
+<div class="about-text">
+<h3 data-en="A New Standard of Premium Residential Hospitality" data-ar="معيار جديد للضيافة السكنية الفاخرة">A New Standard of Premium Residential Hospitality</h3>
+<p data-en="We are a limited liability company offering a new standard of premium residential hospitality, featuring an exclusive collection of fully furnished apartments, villas, and buildings crafted with refined interiors ranging from one-star simplicity to five-star elegance—each tailored to its surrounding neighborhood and designed under the vision of architect Emad Sayed." data-ar="نحن شركة ذات مسؤولية محدودة نقدم معيارًا جديدًا للضيافة السكنية الفاخرة، بمجموعة حصرية من الشقق والفلل والمباني المفروشة بالكامل والمصممة بتشطيبات راقية تتراوح من البساطة ذات النجمة الواحدة إلى الأناقة ذات الخمس نجوم - كل منها مصمم ليتناسب مع الحي المحيط ومصمم تحت رؤية المهندس المعماري عماد سيد.">
+We are a limited liability company offering a new standard of premium residential hospitality, featuring an exclusive collection of fully furnished apartments, villas, and buildings crafted with refined interiors ranging from one-star simplicity to five-star elegance—each tailored to its surrounding neighborhood and designed under the vision of architect Emad Sayed.
+</p>
+<p data-en="The operational excellence is led by Khaled El-Amin, a global hospitality expert with distinguished experience managing top hotels across the Middle East and the United States and Engineer Ali." data-ar="يتميز التميز التشغيلي بقيادة خالد الأمين، خبير الضيافة العالمي ذو الخبرة المتميزة في إدارة أفضل الفنادق في جميع أنحاء الشرق الأوسط والولايات المتحدة والمهندس علي.">
+The operational excellence is led by Khaled El-Amin, a global hospitality expert with distinguished experience managing top hotels across the Middle East and the United States and Engineer Ali.
+</p>
+</div>
+<div class="about-image">
+<img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Luxury Interior">
+</div>
+</div>
+</div>
+</section>
+
+<!-- Services Section -->
+<section class="section services" id="services">
+<div class="container">
+<div class="section-title">
+<h2 data-en="Premium Services" data-ar="خدماتنا الفاخرة">Premium Services</h2>
+<p data-en="Beyond exceptional living spaces, we provide a full suite of premium services" data-ar="إلى جانب مساحات المعيشة الاستثنائية، نقدم مجموعة كاملة من الخدمات الفاخرة">Beyond exceptional living spaces, we provide a full suite of premium services</p>
+</div>
+<div class="services-grid">
+<div class="service-card">
+<div class="service-icon">
+<i class="fas fa-car"></i>
+</div>
+<h3 data-en="Luxury Transportation" data-ar="وسائل النقل الفاخرة">Luxury Transportation</h3>
+<p data-en="Luxury cars with or without a chauffeur (available daily, weekly, or monthly)" data-ar="سيارات فاخرة مع أو بدون سائق (متاحة يوميًا أو أسبوعيًا أو شهريًا)">Luxury cars with or without a chauffeur (available daily, weekly, or monthly)</p>
+<button class="btn btn-primary" style="margin-top: 15px; width: 100%;" id="bookRideBtn" data-en="Book Ride" data-ar="احجز رحلة">Book Ride</button>
+</div>
+<div class="service-card">
+<div class="service-icon">
+<i class="fas fa-utensils"></i>
+</div>
+<h3 data-en="Elegant Breakfast Lounges" data-ar="صالات الإفطار الأنيقة">Elegant Breakfast Lounges</h3>
+<p data-en="Elegant breakfast lounges within select properties" data-ar="صالات إفطار أنيقة داخل العقارات المختارة">Elegant breakfast lounges within select properties</p>
+</div>
+<div class="service-card">
+<div class="service-icon">
+<i class="fas fa-plane-arrival"></i>
+</div>
+<h3 data-en="VIP Airport Reception" data-ar="استقبال المطار الخاص">VIP Airport Reception</h3>
+<p data-en="VIP airport reception for a seamless arrival experience" data-ar="استقبال خاص في المطار لتجربة وصول سلسة">VIP airport reception for a seamless arrival experience</p>
+</div>
+<div class="service-card">
+<div class="service-icon">
+<i class="fas fa-suitcase-rolling"></i>
+</div>
+<h3 data-en="Custom Tailored Tours" data-ar="جولات مخصصة">Custom Tailored Tours</h3>
+<p data-en="Custom-tailored tours for families—Citizens or international—delivered in collaboration with leading travel and tourism companies." data-ar="جولات مخصصة للعائلات—مواطنين أو دوليين—مقدمة بالتعاون مع شركات السفر والسياحة الرائدة.">Custom-tailored tours for families—Citizens or international—delivered in collaboration with leading travel and tourism companies.</p>
+</div>
+<div class="service-card">
+<div class="service-icon">
+<i class="fas fa-user-graduate"></i>
+</div>
+<h3 data-en="Specialized Accommodation" data-ar="إقامة متخصصة">Specialized Accommodation</h3>
+<p data-en="Specialized accommodation solutions for scholarship students and long-term trainees" data-ar="حلول إقامة متخصصة لطلاب المنح الدراسية والمتدربين على المدى الطويل">Specialized accommodation solutions for scholarship students and long-term trainees</p>
+</div>
+<div class="service-card">
+<div class="service-icon">
+<i class="fas fa-heartbeat"></i>
+</div>
+<h3 data-en="Medical Travel Support" data-ar="دعم السفر العلاجي">Medical Travel Support</h3>
+<p data-en="Accommodation for families visiting for leisure or medical travel" data-ar="إقامة للعائلات الزائرة للسياحة أو السفر العلاجي">Accommodation for families visiting for leisure or medical travel</p>
+</div>
+<div class="service-card">
+<div class="service-icon">
+<i class="fas fa-map-marked-alt"></i>
+</div>
+<h3 data-en="Area Guide & Maps" data-ar="دليل المنطقة والخرائط">Area Guide & Maps</h3>
+<p data-en="Offline maps and area guides showing nearby cafes, restaurants, museums, and essential services" data-ar="خرائط دون اتصال ودليل المنطقة يظهر المقاهي القريبة والمطاعم والمتاحف والخدمات الأساسية">Offline maps and area guides showing nearby cafes, restaurants, museums, and essential services</p>
+<button class="btn btn-info" style="margin-top: 15px; width: 100%;" id="viewMapsBtn" data-en="View Area Guide" data-ar="عرض دليل المنطقة">View Area Guide</button>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Team Section -->
+<section class="section" id="team">
+<div class="container">
+<div class="section-title">
+<h2 data-en="Our Expert Team" data-ar="فريقنا الخبير">Our Expert Team</h2>
+<p data-en="Professionals dedicated to crafting exceptional experiences" data-ar="محترفون مكرسون لصنع تجارب استثنائية">Professionals dedicated to crafting exceptional experiences</p>
+</div>
+<div class="team-members">
+<div class="team-member">
+<div class="member-image">
+<img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Emad Sayed">
+</div>
+<h4 data-en="Emad Sayed" data-ar="عماد سيد">Emad Sayed</h4>
+<p data-en="Visionary Architect" data-ar="المهندس المعماري صاحب الرؤية">Visionary Architect</p>
+</div>
+<div class="team-member">
+<div class="member-image">
+<img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Khaled El-Amin">
+</div>
+<h4 data-en="Khaled El-Amin" data-ar="خالد الأمين">Khaled El-Amin</h4>
+<p data-en="Global Hospitality Expert" data-ar="خبير الضيافة العالمي">Global Hospitality Expert</p>
+</div>
+<div class="team-member">
+<div class="member-image">
+<img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Engineer Ali">
+</div>
+<h4 data-en="Engineer Ali" data-ar="المهندس علي">Engineer Ali</h4>
+<p data-en="Engineering Director" data-ar="مدير الهندسة">Engineering Director</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- CTA Section -->
+<section class="section cta" id="contact">
+<div class="container">
+<h2 data-en="Experience Luxury Hospitality Reimagined" data-ar="جرب الضيافة الفاخرة بإعادة التصور">Experience Luxury Hospitality Reimagined</h2>
+<p data-en="We ensure every guest enjoys a stay defined by comfort, privacy, and elevated luxury. Contact us to book your exceptional stay." data-ar="نحن نضمن أن كل ضيف يستمتع بإقامة تتميز بالراحة والخصوصية والفخامة المتطورة. اتصل بنا لحجز إقامتك الاستثنائية.">
+We ensure every guest enjoys a stay defined by comfort, privacy, and elevated luxury. Contact us to book your exceptional stay.
+</p>
+<a href="#booking" class="btn btn-primary" id="ctaBookBtn" data-en="Book Your Stay Now" data-ar="احجز إقامتك الآن">Book Your Stay Now</a>
+</div>
+</section>
+
+<!-- Footer -->
+<footer>
+<div class="container">
+<div class="footer-content">
+<div class="footer-column">
+<h3 data-en="Cairo Elite Hospitality" data-ar="كايرو إيليت للضيافة">Cairo Elite Hospitality</h3>
+<p data-en="Crafting exceptional living experiences since 2015" data-ar="نصنع تجارب معيشية استثنائية منذ 2015">Crafting exceptional living experiences since 2015</p>
+<p><i class="fas fa-phone"></i> +20 12 345 6789</p>
+<p><i class="fas fa-envelope"></i> info@cairoelitehospitality.com</p>
+</div>
+<div class="footer-column">
+<h3 data-en="Quick Links" data-ar="روابط سريعة">Quick Links</h3>
+<a href="#home" data-en="Home" data-ar="الرئيسية">Home</a>
+<a href="#about" data-en="About" data-ar="من نحن">About</a>
+<a href="#services" data-en="Services" data-ar="الخدمات">Services</a>
+<a href="#team" data-en="Our Team" data-ar="فريقنا">Our Team</a>
+</div>
+<div class="footer-column">
+<h3 data-en="Our Services" data-ar="خدماتنا">Our Services</h3>
+<a href="#services" data-en="Luxury Apartments" data-ar="شقق فاخرة">Luxury Apartments</a>
+<a href="#services" data-en="Premium Villas" data-ar="فلل فاخرة">Premium Villas</a>
+<a href="#services" data-en="VIP Airport Reception" data-ar="استقبال المطار الخاص">VIP Airport Reception</a>
+<a href="#services" data-en="Custom Tours" data-ar="جولات مخصصة">Custom Tours</a>
+</div>
+<div class="footer-column">
+<h3 data-en="Connect With Us" data-ar="تواصل معنا">Connect With Us</h3>
+<p data-en="Follow us on social media" data-ar="تابعنا على وسائل التواصل الاجتماعي">Follow us on social media</p>
+<div class="social-icons">
+<a href="#"><i class="fab fa-instagram"></i></a>
+<a href="#"><i class="fab fa-twitter"></i></a>
+<a href="#"><i class="fab fa-linkedin"></i></a>
+<a href="#"><i class="fab fa-facebook"></i></a>
+</div>
+</div>
+</div>
+<div class="copyright">
+<p>&copy; <span id="currentYear"></span> Cairo Elite Hospitality. <span data-en="All rights reserved." data-ar="جميع الحقوق محفوظة.">All rights reserved.</span></p>
+</div>
+</div>
+</footer>
+
+<!-- External Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+// Initialize date picker
+flatpickr(".datepicker", {
+minDate: "today",
+dateFormat: "Y-m-d",
+});
+
+// Initialize time picker
+flatpickr(".timepicker", {
+enableTime: true,
+noCalendar: true,
+dateFormat: "H:i",
+time_24hr: true
+});
+
+// Website Data
+const websiteData = {
+areas: [
+{
+id: "hadayek-el-ahram",
+nameEn: "Hadayek El-Ahram",
+nameAr: "حدائق الأهرام",
+descriptionEn: "Luxury accommodations near the iconic pyramids with breathtaking views.",
+descriptionAr: "إقامة فاخرة بالقرب من الأهرامات الشهيرة مع إطلالات خلابة.",
+image: "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+},
+{
+id: "hadayek-october",
+nameEn: "Hadayek October",
+nameAr: "حدائق أكتوبر",
+descriptionEn: "Modern properties in the heart of October City with premium amenities.",
+descriptionAr: "عقارات حديثة في قلب مدينة أكتوبر مع مرافق فاخرة.",
+image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+},
+{
+id: "el-sheikh-zayed",
+nameEn: "El-Sheikh Zayed",
+nameAr: "الشيخ زايد",
+descriptionEn: "Upscale residential area with luxurious villas and premium services.",
+descriptionAr: "منطقة سكنية راقية مع فلل فاخرة وخدمات متميزة.",
+image: "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&auto=format&fit=crop&w=2068&q=80"
+},
+{
+id: "pyramids-area",
+nameEn: "Pyramids Area",
+nameAr: "منطقة الأهرامات",
+descriptionEn: "Exclusive properties offering direct views of the ancient pyramids.",
+descriptionAr: "عقارات حصرية تطل مباشرة على الأهرامات القديمة.",
+image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+}
+],
+accommodationTypes: [
+{
+id: "villa",
+nameEn: "Luxury Villa",
+nameAr: "فيلا فاخرة",
+price: 10,
+featuresEn: [
+"Private swimming pool",
+"Fully equipped kitchen",
+"3-5 bedrooms",
+"Private garden",
+"24/7 concierge service",
+"Daily housekeeping",
+"Free WiFi"
+],
+featuresAr: [
+"مسبح خاص",
+"مطبخ مجهز بالكامل",
+"3-5 غرف نوم",
+"حديقة خاصة",
+"خدمة كونسيرج 24/7",
+"خدمة تنظيف يومية",
+"واي فاي مجاني"
+],
+image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80",
+virtualTourAvailable: true,
+virtualTourDescriptionEn: "Explore this stunning 5-bedroom villa with panoramic pyramid views, private pool, and luxury amenities in 360° detail.",
+virtualTourDescriptionAr: "استكشف هذه الفيلا الرائعة المكونة من 5 غرف نوم مع إطلالات بانورامية على الأهرامات، ومسبح خاص، ومرافق فاخرة بتفاصيل 360°.",
+priceHistory: [12, 11, 10, 9, 11, 12, 10, 9, 10, 11, 13, 12, 10, 9, 10],
+averagePrice: 10.8,
+trend: -0.8,
+viewCount: 142
+},
+{
+id: "building",
+nameEn: "Premium Building",
+nameAr: "مبنى فاخر",
+price: 15,
+featuresEn: [
+"Multiple apartments per building",
+"Shared amenities",
+"Security service",
+"Parking facilities",
+"Elevator access",
+"Central air conditioning",
+"Maintenance team on-site"
+],
+featuresAr: [
+"شقق متعددة في المبنى",
+"مرافق مشتركة",
+"خدمة أمنية",
+"مرافق انتظار السيارات",
+"وصول بالمصعد",
+"تكييف مركزي",
+"فريق صيانة في الموقع"
+],
+image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+virtualTourAvailable: true,
+virtualTourDescriptionEn: "Tour our premium building with luxury common areas, apartment layouts, and amenities in immersive 360°.",
+virtualTourDescriptionAr: "جرب مبنانا الفاخر مع مناطق مشتركة فاخرة، وتخطيطات الشقق، والمرافق بتجربة غامرة 360°.",
+priceHistory: [16, 15, 14, 16, 17, 15, 14, 15, 16, 14, 15, 16, 17, 15, 14],
+averagePrice: 15.3,
+trend: -0.3,
+viewCount: 89
+},
+{
+id: "apartment",
+nameEn: "Furnished Apartment",
+nameAr: "شقة مفروشة",
+price: 5,
+featuresEn: [
+"1-3 bedrooms",
+"Modern furniture",
+"Kitchen appliances",
+"Smart home features",
+"Weekly cleaning service",
+"High-speed internet",
+"Flat-screen TV"
+],
+featuresAr: [
+"1-3 غرف نوم",
+"أثاث حديث",
+"أجهزة مطبخ",
+"ميزات المنزل الذكي",
+"خدمة تنظيف أسبوعية",
+"إنترنت عالي السرعة",
+"تلفزيون بشاشة مسطحة"
+],
+image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2058&q=80",
+virtualTourAvailable: true,
+virtualTourDescriptionEn: "Walk through this beautifully furnished apartment with modern amenities and stylish interiors in 360° view.",
+virtualTourDescriptionAr: "تجول في هذه الشقة المفروشة الجميلة مع المرافق الحديثة والديكورات الأنيقة من خلال عرض 360°.",
+priceHistory: [6, 5, 4, 5, 6, 5, 4, 5, 6, 5, 4, 5, 6, 5, 4],
+averagePrice: 5.0,
+trend: 0,
+viewCount: 256
+}
+],
+nearbyLocations: [
+{ type: "cafe", nameEn: "Pyramids View Café", nameAr: "مقهى إطلالة الأهرامات", distance: "0.2 km", icon: "fa-coffee" },
+{ type: "restaurant", nameEn: "Luxor Fine Dining", nameAr: "مطعم الأقصر الفاخر", distance: "0.5 km", icon: "fa-utensils" },
+{ type: "museum", nameEn: "Egyptian History Museum", nameAr: "متحف التاريخ المصري", distance: "1.2 km", icon: "fa-landmark" },
+{ type: "mall", nameEn: "Cairo Mall", nameAr: "مول القاهرة", distance: "2.1 km", icon: "fa-shopping-bag" },
+{ type: "pharmacy", nameEn: "24/7 Pharmacy", nameAr: "صيدلية 24/7", distance: "0.3 km", icon: "fa-prescription-bottle" },
+{ type: "hospital", nameEn: "Cairo Medical Center", nameAr: "المركز الطبي بالقاهرة", distance: "1.5 km", icon: "fa-hospital" },
+{ type: "gym", nameEn: "Elite Fitness Center", nameAr: "مركز النخبة لللياقة", distance: "0.8 km", icon: "fa-dumbbell" },
+{ type: "workspace", nameEn: "Co-Working Space", nameAr: "مساحة العمل المشتركة", distance: "0.8 km", icon: "fa-laptop" },
+{ type: "cafe", nameEn: "Desert Oasis Coffee", nameAr: "قهوة واحة الصحراء", distance: "0.7 km", icon: "fa-coffee" },
+{ type: "restaurant", nameEn: "Nile River Restaurant", nameAr: "مطعم نهر النيل", distance: "1.0 km", icon: "fa-utensils" },
+{ type: "pharmacy", nameEn: "Quick Pharmacy", nameAr: "الصيدلية السريعة", distance: "0.9 km", icon: "fa-prescription-bottle" },
+{ type: "gym", nameEn: "Pyramid Gym", nameAr: "نادي الأهرام الرياضي", distance: "1.3 km", icon: "fa-dumbbell" }
+],
+mapCategories: [
+{ id: "all", nameEn: "All Locations", nameAr: "جميع المواقع", icon: "fa-layer-group" },
+{ id: "cafe", nameEn: "Cafes", nameAr: "مقاهي", icon: "fa-coffee" },
+{ id: "restaurant", nameEn: "Restaurants", nameAr: "مطاعم", icon: "fa-utensils" },
+{ id: "museum", nameEn: "Museums", nameAr: "متاحف", icon: "fa-landmark" },
+{ id: "mall", nameEn: "Shopping Malls", nameAr: "مراكز تسوق", icon: "fa-shopping-bag" },
+{ id: "pharmacy", nameEn: "Pharmacies", nameAr: "صيدليات", icon: "fa-prescription-bottle" },
+{ id: "hospital", nameEn: "Hospitals", nameAr: "مستشفيات", icon: "fa-hospital" },
+{ id: "gym", nameEn: "Gyms", nameAr: "نوادي رياضية", icon: "fa-dumbbell" },
+{ id: "workspace", nameEn: "Workspaces", nameAr: "مساحات عمل", icon: "fa-laptop" }
+],
+rideOptions: {
+sedan: { price: 50, nameEn: "Premium Sedan", nameAr: "سيارة سيدان فاخرة" },
+suv: { price: 75, nameEn: "Luxury SUV", nameAr: "سيارة دفع رباعي فاخرة" },
+withDriver: { price: 30, nameEn: "With Driver", nameAr: "مع سائق" },
+withoutDriver: { price: 0, nameEn: "Without Driver", nameAr: "بدون سائق" }
+}
+};
+
+// Current booking state
+let currentBooking = {
+areaId: null,
+accommodationId: null,
+price: 0,
+nights: 1
+};
+
+// Ride booking state
+let rideBooking = {
+vehicleType: null,
+driverOption: null
+};
+
+// Virtual tour state
+let virtualTour = {
+autoRotateInterval: null,
+isAutoRotating: false,
+rotationAngle: 0
+};
+
+// Language Toggle Functionality
+const languageToggle = document.getElementById('languageToggle');
+const langText = document.querySelector('.lang-text');
+const body = document.body;
+let currentLang = 'en';
+
+languageToggle.addEventListener('click', function() {
+if (currentLang === 'en') {
+// Switch to Arabic
+currentLang = 'ar';
+langText.textContent = 'English';
+body.classList.remove('ltr');
+body.classList.add('rtl');
+body.setAttribute('dir', 'rtl');
+} else {
+// Switch to English
+currentLang = 'en';
+langText.textContent = 'العربية';
+body.classList.remove('rtl');
+body.classList.add('ltr');
+body.setAttribute('dir', 'ltr');
+}
+
+// Update all elements with data attributes
+updateContentLanguage();
+});
+
+function updateContentLanguage() {
+// Update all elements with data attributes
+document.querySelectorAll('[data-en]').forEach(element => {
+if (currentLang === 'en') {
+if (element.hasAttribute('data-en')) {
+element.textContent = element.getAttribute('data-en');
+}
+if (element.hasAttribute('placeholder-en')) {
+element.setAttribute('placeholder', element.getAttribute('placeholder-en'));
+}
+} else {
+if (element.hasAttribute('data-ar')) {
+element.textContent = element.getAttribute('data-ar');
+}
+if (element.hasAttribute('placeholder-ar')) {
+element.setAttribute('placeholder', element.getAttribute('placeholder-ar'));
+}
+}
+});
+
+// Update area booking title if on area booking page
+const areaBookingPage = document.getElementById('areaBookingPage');
+if (areaBookingPage.classList.contains('active')) {
+updateAreaBookingPage();
+}
+
+// Update modals if open
+updateOpenModals();
+}
+
+// Mobile Menu Toggle
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mainNav = document.getElementById('mainNav');
+
+mobileMenuBtn.addEventListener('click', function() {
+mainNav.classList.toggle('active');
+mobileMenuBtn.innerHTML = mainNav.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+});
+
+// Close mobile menu when clicking a link
+document.querySelectorAll('.nav-link').forEach(link => {
+link.addEventListener('click', function() {
+mainNav.classList.remove('active');
+mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+});
+});
+
+// Update current year in footer
+document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function(e) {
+const targetId = this.getAttribute('href');
+
+// Don't prevent default for booking links
+if (targetId === '#booking') {
+showBookingPage();
+e.preventDefault();
+return;
+}
+
+if (targetId === '#home') {
+showHomePage();
+e.preventDefault();
+return;
+}
+
+if (targetId === '#' || targetId === '#bookingPage' || targetId === '#areaBookingPage') {
+e.preventDefault();
+return;
+}
+
+e.preventDefault();
+
+const targetElement = document.querySelector(targetId);
+if (targetElement) {
+window.scrollTo({
+top: targetElement.offsetTop - 80,
+behavior: 'smooth'
+});
+}
+});
+});
+
+// Customer Service Modal Functionality
+const customerServiceBtn = document.getElementById('customerServiceBtn');
+const customerServiceModal = document.getElementById('customerServiceModal');
+const closeServiceModalBtn = document.getElementById('closeServiceModal');
+const chatOption = document.getElementById('chatOption');
+const callOption = document.getElementById('callOption');
+
+// Open customer service modal
+customerServiceBtn.addEventListener('click', function() {
+openCustomerServiceModal();
+});
+
+// Close customer service modal
+closeServiceModalBtn.addEventListener('click', closeCustomerServiceModal);
+customerServiceModal.addEventListener('click', function(e) {
+if (e.target === customerServiceModal) {
+closeCustomerServiceModal();
+}
+});
+
+// Close with Escape key
+document.addEventListener('keydown', function(e) {
+if (e.key === 'Escape' && customerServiceModal.classList.contains('active')) {
+closeCustomerServiceModal();
+}
+});
+
+function openCustomerServiceModal() {
+customerServiceModal.classList.add('active');
+}
+
+function closeCustomerServiceModal() {
+customerServiceModal.classList.remove('active');
+}
+
+// Chat option
+chatOption.addEventListener('click', function() {
+if (currentLang === 'en') {
+alert('Opening live chat...\n\nIn a real implementation, this would open a chat window with our customer service team.');
+} else {
+alert('فتح الدردشة المباشرة...\n\nفي التطبيق الحقيقي، سيتم فتح نافذة دردشة مع فريق خدمة العملاء لدينا.');
+}
+closeCustomerServiceModal();
+});
+
+// Call option
+callOption.addEventListener('click', function() {
+if (currentLang === 'en') {
+alert('Calling +20 12 345 6789...\n\nIn a real implementation, this would initiate a phone call to our customer service line.');
+} else {
+alert('جاري الاتصال بـ +20 12 345 6789...\n\nفي التطبيق الحقيقي، سيتم بدء مكالمة هاتفية مع خط خدمة العملاء لدينا.');
+}
+closeCustomerServiceModal();
+});
+
+// Booking Details Modal Functionality
+const bookingDetailsModal = document.getElementById('bookingDetailsModal');
+const closeBookingDetailsBtn = document.getElementById('closeBookingDetails');
+const decreaseNightsBtn = document.getElementById('decreaseNights');
+const increaseNightsBtn = document.getElementById('increaseNights');
+const nightsValue = document.getElementById('nightsValue');
+const totalPrice = document.getElementById('totalPrice');
+const priceBreakdown = document.getElementById('priceBreakdown');
+const confirmBookingBtn = document.getElementById('confirmBooking');
+
+// Close booking details modal
+closeBookingDetailsBtn.addEventListener('click', closeBookingDetailsModal);
+bookingDetailsModal.addEventListener('click', function(e) {
+if (e.target === bookingDetailsModal) {
+closeBookingDetailsModal();
+}
+});
+
+// Close with Escape key
+document.addEventListener('keydown', function(e) {
+if (e.key === 'Escape' && bookingDetailsModal.classList.contains('active')) {
+closeBookingDetailsModal();
+}
+});
+
+function openBookingDetailsModal(areaId, accommodationId) {
+const area = websiteData.areas.find(a => a.id === areaId);
+const accommodation = websiteData.accommodationTypes.find(a => a.id === accommodationId);
+
+// Update current booking state
+currentBooking.areaId = areaId;
+currentBooking.accommodationId = accommodationId;
+currentBooking.price = accommodation.price;
+currentBooking.nights = 1;
+
+// Update modal title
+const modalTitle = document.getElementById('bookingModalTitle');
+if (currentLang === 'en') {
+modalTitle.textContent = `Book ${accommodation.nameEn} in ${area.nameEn}`;
+} else {
+modalTitle.textContent = `احجز ${accommodation.nameAr} في ${area.nameAr}`;
+}
+
+// Update accommodation summary
+const accommodationSummary = document.getElementById('accommodationSummary');
+accommodationSummary.innerHTML = `
+<div class="accommodation-image">
+<img src="${accommodation.image}" alt="${accommodation.nameEn}">
+</div>
+<div class="accommodation-info">
+<h4>
+<span class="summary-name-en">${accommodation.nameEn}</span>
+<span class="summary-name-ar" style="display:none;">${accommodation.nameAr}</span>
+</h4>
+<p>
+<span class="summary-area-en">${area.nameEn}</span>
+<span class="summary-area-ar" style="display:none;">${area.nameAr}</span>
+</p>
+<div class="accommodation-price">$${accommodation.price}<span data-en="/night" data-ar="/ليلة">/night</span></div>
+<div style="margin-top: 10px; font-size: 0.9rem; color: var(--text-light);">
+<i class="fas fa-eye"></i>
+<span data-en="${accommodation.viewCount} people viewed this" data-ar="${accommodation.viewCount} شخص شاهد هذا">${accommodation.viewCount} people viewed this</span>
+</div>
+</div>
+`;
+
+// Reset nights to 1
+nightsValue.textContent = '1';
+updateTotalPrice();
+
+// Show modal
+bookingDetailsModal.classList.add('active');
+
+// Update language for new elements
+updateContentLanguage();
+}
+
+function closeBookingDetailsModal() {
+bookingDetailsModal.classList.remove('active');
+}
+
+// Nights control
+decreaseNightsBtn.addEventListener('click', function() {
+let nights = parseInt(nightsValue.textContent);
+if (nights > 1) {
+nights--;
+nightsValue.textContent = nights;
+currentBooking.nights = nights;
+updateTotalPrice();
+}
+});
+
+increaseNightsBtn.addEventListener('click', function() {
+let nights = parseInt(nightsValue.textContent);
+if (nights < 30) {
+nights++;
+nightsValue.textContent = nights;
+currentBooking.nights = nights;
+updateTotalPrice();
+}
+});
+
+function updateTotalPrice() {
+const total = currentBooking.price * currentBooking.nights;
+totalPrice.textContent = `$${total}`;
+
+if (currentLang === 'en') {
+priceBreakdown.textContent = `$${currentBooking.price} × ${currentBooking.nights} night${currentBooking.nights > 1 ? 's' : ''}`;
+} else {
+priceBreakdown.textContent = `$${currentBooking.price} × ${currentBooking.nights} ليلة${currentBooking.nights > 1 ? '' : 'ة'}`;
+}
+}
+
+// Confirm booking
+confirmBookingBtn.addEventListener('click', function() {
+const guestName = document.getElementById('guestName').value;
+const guestEmail = document.getElementById('guestEmail').value;
+const guestPhone = document.getElementById('guestPhone').value;
+const checkInDate = document.getElementById('checkInDate').value;
+const specialRequests = document.getElementById('specialRequests').value;
+
+if (!guestName || !guestEmail || !guestPhone || !checkInDate) {
+if (currentLang === 'en') {
+alert('Please fill in all required fields.');
+} else {
+alert('يرجى ملء جميع الحقول المطلوبة.');
+}
+return;
+}
+
+const area = websiteData.areas.find(a => a.id === currentBooking.areaId);
+const accommodation = websiteData.accommodationTypes.find(a => a.id === currentBooking.accommodationId);
+const total = currentBooking.price * currentBooking.nights;
+
+if (currentLang === 'en') {
+alert(`Booking confirmed!\n\nDetails:\nAccommodation: ${accommodation.nameEn}\nArea: ${area.nameEn}\nCheck-in: ${checkInDate}\nNights: ${currentBooking.nights}\nTotal Price: $${total}\n\nGuest Information:\nName: ${guestName}\nEmail: ${guestEmail}\nPhone: ${guestPhone}\n\nSpecial Requests: ${specialRequests || 'None'}\n\nA confirmation email has been sent to ${guestEmail}.`);
+} else {
+alert(`تم تأكيد الحجز!\n\nالتفاصيل:\nالإقامة: ${accommodation.nameAr}\nالمنطقة: ${area.nameAr}\nتاريخ الوصول: ${checkInDate}\nالليالي: ${currentBooking.nights}\nالسعر الإجمالي: $${total}\n\nمعلومات الضيف:\nالاسم: ${guestName}\nالبريد الإلكتروني: ${guestEmail}\nالهاتف: ${guestPhone}\n\nالطلبات الخاصة: ${specialRequests || 'لا توجد'}\n\nتم إرسال بريد تأكيد إلى ${guestEmail}.`);
+}
+
+closeBookingDetailsModal();
+
+// Reset form
+document.getElementById('guestName').value = '';
+document.getElementById('guestEmail').value = '';
+document.getElementById('guestPhone').value = '';
+document.getElementById('checkInDate').value = '';
+document.getElementById('specialRequests').value = '';
+});
+
+// Ride Booking Modal Functionality - FIXED
+const rideBookingModal = document.getElementById('rideBookingModal');
+const closeRideModalBtn = document.getElementById('closeRideModal');
+const bookRideBtn = document.getElementById('bookRideBtn');
+const confirmRideBookingBtn = document.getElementById('confirmRideBooking');
+
+// Open ride booking modal
+bookRideBtn.addEventListener('click', function() {
+openRideBookingModal();
+});
+
+// Close ride booking modal
+closeRideModalBtn.addEventListener('click', closeRideBookingModal);
+rideBookingModal.addEventListener('click', function(e) {
+if (e.target === rideBookingModal) {
+closeRideBookingModal();
+}
+});
+
+// Close with Escape key
+document.addEventListener('keydown', function(e) {
+if (e.key === 'Escape' && rideBookingModal.classList.contains('active')) {
+closeRideBookingModal();
+}
+});
+
+function openRideBookingModal() {
+// Reset selections
+rideBooking.vehicleType = null;
+rideBooking.driverOption = null;
+
+// Update selections
+updateRideSelections();
+
+// Show modal
+rideBookingModal.classList.add('active');
+}
+
+function closeRideBookingModal() {
+rideBookingModal.classList.remove('active');
+}
+
+// Vehicle type selection
+document.querySelectorAll('.ride-option-card[data-type]').forEach(card => {
+card.addEventListener('click', function() {
+rideBooking.vehicleType = this.getAttribute('data-type');
+updateRideSelections();
+});
+});
+
+// Driver option selection
+document.querySelectorAll('.ride-option-card[data-driver]').forEach(card => {
+card.addEventListener('click', function() {
+rideBooking.driverOption = this.getAttribute('data-driver');
+updateRideSelections();
+});
+});
+
+function updateRideSelections() {
+// Update vehicle selection
+document.querySelectorAll('.ride-option-card[data-type]').forEach(card => {
+if (card.getAttribute('data-type') === rideBooking.vehicleType) {
+card.classList.add('selected');
+} else {
+card.classList.remove('selected');
+}
+});
+
+// Update driver selection
+document.querySelectorAll('.ride-option-card[data-driver]').forEach(card => {
+if (card.getAttribute('data-driver') === rideBooking.driverOption) {
+card.classList.add('selected');
+} else {
+card.classList.remove('selected');
+}
+});
+
+// Enable/disable confirm button
+if (rideBooking.vehicleType && rideBooking.driverOption) {
+confirmRideBookingBtn.disabled = false;
+confirmRideBookingBtn.style.opacity = '1';
+confirmRideBookingBtn.style.cursor = 'pointer';
+} else {
+confirmRideBookingBtn.disabled = true;
+confirmRideBookingBtn.style.opacity = '0.6';
+confirmRideBookingBtn.style.cursor = 'not-allowed';
+}
+}
+
+// Confirm ride booking
+confirmRideBookingBtn.addEventListener('click', function() {
+if (!rideBooking.vehicleType || !rideBooking.driverOption) return;
+
+const pickupLocation = document.getElementById('pickupLocation').value;
+const destination = document.getElementById('destination').value;
+const pickupDate = document.getElementById('pickupDate').value;
+const pickupTime = document.getElementById('pickupTime').value;
+const rentalDuration = document.getElementById('rentalDuration').value;
+const specialRequests = document.getElementById('rideSpecialRequests').value;
+
+// Calculate price
+let totalPrice = websiteData.rideOptions[rideBooking.vehicleType].price;
+if (rideBooking.driverOption === 'with') {
+totalPrice += websiteData.rideOptions.withDriver.price;
+}
+
+// Multiplier for duration
+const durationMultipliers = { daily: 1, weekly: 7, monthly: 30 };
+totalPrice *= durationMultipliers[rentalDuration];
+
+if (currentLang === 'en') {
+alert(`Ride booked successfully!\n\nDetails:\nVehicle: ${websiteData.rideOptions[rideBooking.vehicleType].nameEn}\nDriver: ${rideBooking.driverOption === 'with' ? 'With professional driver' : 'Self-drive'}\nPickup: ${pickupLocation || 'Not specified'}\nDestination: ${destination || 'Not specified'}\nDate: ${pickupDate || 'Not specified'}\nTime: ${pickupTime || 'Not specified'}\nDuration: ${rentalDuration}\nTotal Price: $${totalPrice}\n\nSpecial Requests: ${specialRequests || 'None'}`);
+} else {
+alert(`تم حجز الرحلة بنجاح!\n\nالتفاصيل:\nالمركبة: ${websiteData.rideOptions[rideBooking.vehicleType].nameAr}\nالسائق: ${rideBooking.driverOption === 'with' ? 'مع سائق محترف' : 'قيادة ذاتية'}\nموقع الاستلام: ${pickupLocation || 'غير محدد'}\nالوجهة: ${destination || 'غير محدد'}\nالتاريخ: ${pickupDate || 'غير محدد'}\nالوقت: ${pickupTime || 'غير محدد'}\nالمدة: ${rentalDuration}\nالسعر الإجمالي: $${totalPrice}\n\nالطلبات الخاصة: ${specialRequests || 'لا توجد'}`);
+}
+
+closeRideBookingModal();
+
+// Reset form
+document.getElementById('pickupLocation').value = '';
+document.getElementById('destination').value = '';
+document.getElementById('pickupDate').value = '';
+document.getElementById('pickupTime').value = '';
+document.getElementById('rideSpecialRequests').value = '';
+});
+
+// Virtual Walkthrough Modal Functionality - FIXED
+const virtualWalkthroughModal = document.getElementById('virtualWalkthroughModal');
+const closeModalBtn = document.getElementById('closeModal');
+const walkthroughPlaceholder = document.getElementById('walkthroughPlaceholder');
+const walkthroughTitle = document.getElementById('walkthroughTitle');
+const walkthroughDescription = document.getElementById('walkthroughDescription');
+const modalTitle = document.getElementById('modalTitle');
+
+// Close modal when clicking X or outside modal
+closeModalBtn.addEventListener('click', closeVirtualModal);
+virtualWalkthroughModal.addEventListener('click', function(e) {
+if (e.target === virtualWalkthroughModal) {
+closeVirtualModal();
+}
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(e) {
+if (e.key === 'Escape' && virtualWalkthroughModal.classList.contains('active')) {
+closeVirtualModal();
+}
+});
+
+function closeVirtualModal() {
+virtualWalkthroughModal.classList.remove('active');
+stopAutoRotation();
+}
+
+function showVirtualTour(areaId, accommodationId) {
+const area = websiteData.areas.find(a => a.id === areaId);
+const accommodation = websiteData.accommodationTypes.find(a => a.id === accommodationId);
+
+// Update modal title
+if (currentLang === 'en') {
+modalTitle.textContent = `Virtual Walkthrough: ${accommodation.nameEn} in ${area.nameEn}`;
+walkthroughTitle.textContent = `${accommodation.nameEn} - ${area.nameEn}`;
+walkthroughDescription.textContent = accommodation.virtualTourDescriptionEn || "Experience this property in immersive 360° virtual reality.";
+} else {
+modalTitle.textContent = `جولة افتراضية 360°: ${accommodation.nameAr} في ${area.nameAr}`;
+walkthroughTitle.textContent = `${accommodation.nameAr} - ${area.nameAr}`;
+walkthroughDescription.textContent = accommodation.virtualTourDescriptionAr || "جرب هذه العقار بتقنية الواقع الافتراضي 360° الغامرة.";
+}
+
+// Reset rotation
+virtualTour.rotationAngle = 0;
+updateWalkthroughRotation();
+
+// Show modal
+virtualWalkthroughModal.classList.add('active');
+}
+
+// Virtual tour controls simulation
+document.getElementById('rotateLeft').addEventListener('click', function() {
+virtualTour.rotationAngle -= 45;
+updateWalkthroughRotation();
+});
+
+document.getElementById('rotateRight').addEventListener('click', function() {
+virtualTour.rotationAngle += 45;
+updateWalkthroughRotation();
+});
+
+document.getElementById('toggleAutoRotate').addEventListener('click', function() {
+if (virtualTour.isAutoRotating) {
+stopAutoRotation();
+} else {
+startAutoRotation();
+}
+});
+
+function updateWalkthroughRotation() {
+const icon = document.getElementById('autoRotateIcon');
+walkthroughPlaceholder.style.transform = `rotateY(${virtualTour.rotationAngle}deg)`;
+
+// Update auto-rotate button icon
+if (virtualTour.isAutoRotating) {
+icon.className = 'fas fa-pause';
+} else {
+icon.className = 'fas fa-play';
+}
+}
+
+function startAutoRotation() {
+virtualTour.isAutoRotating = true;
+updateWalkthroughRotation();
+
+virtualTour.autoRotateInterval = setInterval(function() {
+virtualTour.rotationAngle += 5;
+if (virtualTour.rotationAngle >= 360) virtualTour.rotationAngle = 0;
+updateWalkthroughRotation();
+}, 100);
+}
+
+function stopAutoRotation() {
+virtualTour.isAutoRotating = false;
+clearInterval(virtualTour.autoRotateInterval);
+updateWalkthroughRotation();
+}
+
+// Offline Maps Modal Functionality - FIXED
+const mapsModal = document.getElementById('mapsModal');
+const closeMapsModalBtn = document.getElementById('closeMapsModal');
+const viewMapsBtn = document.getElementById('viewMapsBtn');
+let currentCategory = 'all';
+
+// Open maps modal
+viewMapsBtn.addEventListener('click', function() {
+openMapsModal();
+});
+
+// Close maps modal
+closeMapsModalBtn.addEventListener('click', closeMapsModal);
+mapsModal.addEventListener('click', function(e) {
+if (e.target === mapsModal) {
+closeMapsModal();
+}
+});
+
+// Close with Escape key
+document.addEventListener('keydown', function(e) {
+if (e.key === 'Escape' && mapsModal.classList.contains('active')) {
+closeMapsModal();
+}
+});
+
+function openMapsModal() {
+mapsModal.classList.add('active');
+populateMapCategories();
+populateMapLocations();
+}
+
+function closeMapsModal() {
+mapsModal.classList.remove('active');
+}
+
+// Populate map categories - FIXED
+function populateMapCategories() {
+const mapCategories = document.getElementById('mapCategories');
+mapCategories.innerHTML = '';
+
+websiteData.mapCategories.forEach(category => {
+const categoryElement = document.createElement('div');
+categoryElement.className = `map-category ${category.id} ${category.id === currentCategory ? 'active' : ''}`;
+categoryElement.setAttribute('data-category', category.id);
+
+categoryElement.innerHTML = `
+<div class="map-category-icon">
+<i class="fas ${category.icon}"></i>
+</div>
+<span class="category-name-en">${category.nameEn}</span>
+<span class="category-name-ar" style="display:none;">${category.nameAr}</span>
+`;
+
+categoryElement.addEventListener('click', function() {
+currentCategory = this.getAttribute('data-category');
+
+// Update active category
+document.querySelectorAll('.map-category').forEach(cat => {
+cat.classList.remove('active');
+});
+this.classList.add('active');
+
+populateMapLocations();
+});
+
+mapCategories.appendChild(categoryElement);
+});
+
+// Update language for new elements
+updateContentLanguage();
+}
+
+// Populate map locations based on current category - FIXED
+function populateMapLocations() {
+const mapLocations = document.getElementById('mapLocations');
+mapLocations.innerHTML = '';
+
+let filteredLocations = websiteData.nearbyLocations;
+if (currentCategory !== 'all') {
+filteredLocations = websiteData.nearbyLocations.filter(loc => loc.type === currentCategory);
+}
+
+filteredLocations.forEach(location => {
+const locationItem = document.createElement('div');
+locationItem.className = `map-location-item ${location.type}`;
+locationItem.setAttribute('data-type', location.type);
+
+locationItem.innerHTML = `
+<div class="map-location-header">
+<div class="map-location-icon">
+<i class="fas ${location.icon}"></i>
+</div>
+<h4>
+<span class="location-name-en">${location.nameEn}</span>
+<span class="location-name-ar" style="display:none;">${location.nameAr}</span>
+</h4>
+</div>
+<div class="map-location-distance">${location.distance} <span data-en="away" data-ar="بعيدًا">away</span></div>
+`;
+
+mapLocations.appendChild(locationItem);
+});
+
+// Update language for new elements
+updateContentLanguage();
+}
+
+// Download map button
+document.getElementById('downloadMapBtn').addEventListener('click', function() {
+const categoryName = websiteData.mapCategories.find(cat => cat.id === currentCategory);
+if (currentLang === 'en') {
+alert(`Downloading offline map for ${categoryName.nameEn}...\n\nIn a real implementation, this would download a high-resolution map of the area with all ${currentCategory === 'all' ? 'locations' : categoryName.nameEn.toLowerCase()} marked for offline use.`);
+} else {
+alert(`جارٍ تنزيل الخريطة دون اتصال لـ ${categoryName.nameAr}...\n\nفي التطبيق الحقيقي، سيقوم هذا بتنزيل خريطة عالية الدقة للمنطقة مع جميع ${currentCategory === 'all' ? 'المواقع' : categoryName.nameAr} المحددة للاستخدام دون اتصال.`);
+}
+});
+
+function updateOpenModals() {
+// Update open modals based on current language
+if (customerServiceModal.classList.contains('active')) {
+updateContentLanguage();
+}
+
+if (bookingDetailsModal.classList.contains('active')) {
+updateContentLanguage();
+}
+
+if (rideBookingModal.classList.contains('active')) {
+updateContentLanguage();
+}
+
+if (mapsModal.classList.contains('active')) {
+updateContentLanguage();
+populateMapCategories();
+populateMapLocations();
+}
+
+if (virtualWalkthroughModal.classList.contains('active')) {
+updateContentLanguage();
+}
+}
+
+// Show booking page function
+function showBookingPage() {
+// Hide hero and other sections
+document.querySelector('.hero').style.display = 'none';
+document.getElementById('about').style.display = 'none';
+document.getElementById('services').style.display = 'none';
+document.getElementById('team').style.display = 'none';
+document.getElementById('contact').style.display = 'none';
+
+// Show booking page
+document.getElementById('bookingPage').classList.add('active');
+document.getElementById('areaBookingPage').classList.remove('active');
+
+// Populate areas
+populateAreas();
+
+// Scroll to top
+window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Show home page function
+function showHomePage() {
+// Show all sections
+document.querySelector('.hero').style.display = 'flex';
+document.getElementById('about').style.display = 'block';
+document.getElementById('services').style.display = 'block';
+document.getElementById('team').style.display = 'block';
+document.getElementById('contact').style.display = 'block';
+
+// Hide booking pages
+document.getElementById('bookingPage').classList.remove('active');
+document.getElementById('areaBookingPage').classList.remove('active');
+
+// Scroll to top
+window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Populate areas in the booking page
+function populateAreas() {
+const areasGrid = document.getElementById('areasGrid');
+areasGrid.innerHTML = '';
+
+websiteData.areas.forEach(area => {
+const areaCard = document.createElement('div');
+areaCard.className = 'area-card';
+areaCard.setAttribute('data-area-id', area.id);
+
+areaCard.innerHTML = `
+<div class="area-image">
+<img src="${area.image}" alt="${area.nameEn}">
+</div>
+<div class="area-content">
+<h3>
+<span class="area-name-en">${area.nameEn}</span>
+<span class="area-name-ar" style="display:none;">${area.nameAr}</span>
+</h3>
+<p>
+<span class="area-desc-en">${area.descriptionEn}</span>
+<span class="area-desc-ar" style="display:none;">${area.descriptionAr}</span>
+</p>
+<div class="book-area-btn" style="margin-top: 15px;">
+<button class="btn btn-primary" style="width: 100%;" data-en="View Options" data-ar="عرض الخيارات">View Options</button>
+</div>
+</div>
+`;
+
+areaCard.addEventListener('click', () => {
+showAreaBookingPage(area.id);
+});
+
+areasGrid.appendChild(areaCard);
+});
+
+// Update language for new elements
+updateContentLanguage();
+}
+
+// Show area booking page with accommodation options
+function showAreaBookingPage(areaId) {
+// Hide areas page
+document.getElementById('bookingPage').classList.remove('active');
+
+// Show area booking page
+document.getElementById('areaBookingPage').classList.add('active');
+
+// Update area title
+const area = websiteData.areas.find(a => a.id === areaId);
+const areaBookingTitle = document.getElementById('areaBookingTitle');
+const areaBookingDesc = document.getElementById('areaBookingDesc');
+
+if (currentLang === 'en') {
+areaBookingTitle.textContent = `Accommodation Options in ${area.nameEn}`;
+areaBookingDesc.textContent = 'Choose your preferred accommodation type';
+} else {
+areaBookingTitle.textContent = `خيارات الإقامة في ${area.nameAr}`;
+areaBookingDesc.textContent = 'اختر نوع الإقامة المفضل لديك';
+}
+
+// Populate accommodation options
+populateAccommodationOptions(areaId);
+
+// Update back button to go back to areas
+document.getElementById('backToAreas').onclick = (e) => {
+e.preventDefault();
+document.getElementById('areaBookingPage').classList.remove('active');
+document.getElementById('bookingPage').classList.add('active');
+};
+}
+
+// Populate accommodation options for a specific area
+function populateAccommodationOptions(areaId) {
+const accommodationOptions = document.getElementById('accommodationOptions');
+accommodationOptions.innerHTML = '';
+
+const area = websiteData.areas.find(a => a.id === areaId);
+
+websiteData.accommodationTypes.forEach(accommodation => {
+const optionCard = document.createElement('div');
+optionCard.className = 'option-card';
+
+// Get features based on current language
+const features = currentLang === 'en' ? accommodation.featuresEn : accommodation.featuresAr;
+
+// Determine price badge
+let priceBadgeClass = 'price-average';
+let priceBadgeText = '';
+
+if (accommodation.trend < -0.5) {
+priceBadgeClass = 'price-good';
+priceBadgeText = currentLang === 'en' ? 'Best Value' : 'أفضل قيمة';
+} else if (accommodation.trend > 0.5) {
+priceBadgeClass = 'price-high';
+priceBadgeText = currentLang === 'en' ? 'High Demand' : 'طلب مرتفع';
+} else {
+priceBadgeClass = 'price-average';
+priceBadgeText = currentLang === 'en' ? 'Average Price' : 'سعر متوسط';
+}
+
+optionCard.innerHTML = `
+<div class="option-image">
+<img src="${accommodation.image}" alt="${accommodation.nameEn}">
+${accommodation.virtualTourAvailable ? `
+<div class="virtual-badge">
+<i class="fas fa-vr-cardboard"></i>
+<span data-en="360° View" data-ar="عرض 360°">360° View</span>
+</div>
+` : ''}
+<div class="view-count-badge">
+<i class="fas fa-eye"></i>
+<span class="view-count">${accommodation.viewCount}</span>
+</div>
+</div>
+<div class="option-content">
+<div class="option-header">
+<h3>
+<span class="option-name-en">${accommodation.nameEn}</span>
+<span class="option-name-ar" style="display:none;">${accommodation.nameAr}</span>
+</h3>
+<div class="price-container">
+<div class="price">$${accommodation.price}<span data-en="/night" data-ar="/ليلة">/night</span></div>
+<div class="price-history-badge ${priceBadgeClass}">${priceBadgeText}</div>
+</div>
+</div>
+<div class="option-features">
+${features.map(feature => `
+<div class="feature">
+<i class="fas fa-check-circle"></i>
+<span>${feature}</span>
+</div>
+`).join('')}
+</div>
+<div class="option-actions">
+${accommodation.virtualTourAvailable ? `
+<button class="btn btn-secondary virtual-tour-btn"
+data-area="${areaId}"
+data-accommodation="${accommodation.id}"
+data-en="Virtual Tour"
+data-ar="جولة افتراضية">Virtual Tour</button>
+` : ''}
+<button class="btn btn-warning offline-maps-btn"
+data-area="${areaId}"
+data-accommodation="${accommodation.id}"
+data-en="Area Guide"
+data-ar="دليل المنطقة">Area Guide</button>
+</div>
+</div>
+`;
+
+// Make the entire card clickable for booking
+optionCard.addEventListener('click', function(e) {
+// Don't trigger if clicking on buttons
+if (!e.target.closest('.btn')) {
+openBookingDetailsModal(areaId, accommodation.id);
+}
+});
+
+accommodationOptions.appendChild(optionCard);
+});
+
+// Update language for new elements
+updateContentLanguage();
+
+// Add event listeners to virtual tour buttons
+document.querySelectorAll('.virtual-tour-btn').forEach(button => {
+button.addEventListener('click', function(e) {
+e.stopPropagation(); // Prevent card click
+const areaId = this.getAttribute('data-area');
+const accommodationId = this.getAttribute('data-accommodation');
+showVirtualTour(areaId, accommodationId);
+});
+});
+
+// Add event listeners to offline maps buttons
+document.querySelectorAll('.offline-maps-btn').forEach(button => {
+button.addEventListener('click', function(e) {
+e.stopPropagation(); // Prevent card click
+openMapsModal();
+});
+});
+}
+
+// Update area booking page based on current language
+function updateAreaBookingPage() {
+const areaBookingPage = document.getElementById('areaBookingPage');
+if (areaBookingPage.classList.contains('active')) {
+// Find which area is currently active
+const areaBookingTitle = document.getElementById('areaBookingTitle');
+const currentTitle = areaBookingTitle.textContent;
+
+// Extract area name from title
+let areaName = '';
+if (currentLang === 'en') {
+areaName = currentTitle.replace('Accommodation Options in ', '');
+} else {
+areaName = currentTitle.replace('خيارات الإقامة في ', '');
+}
+
+// Find the area by name
+let areaId = '';
+if (currentLang === 'en') {
+const area = websiteData.areas.find(a => a.nameEn === areaName);
+if (area) areaId = area.id;
+} else {
+const area = websiteData.areas.find(a => a.nameAr === areaName);
+if (area) areaId = area.id;
+}
+
+if (areaId) {
+// Update area title
+const area = websiteData.areas.find(a => a.id === areaId);
+const areaBookingDesc = document.getElementById('areaBookingDesc');
+
+if (currentLang === 'en') {
+areaBookingTitle.textContent = `Accommodation Options in ${area.nameEn}`;
+areaBookingDesc.textContent = 'Choose your preferred accommodation type';
+} else {
+areaBookingTitle.textContent = `خيارات الإقامة في ${area.nameAr}`;
+areaBookingDesc.textContent = 'اختر نوع الإقامة المفضل لديك';
+}
+
+// Update accommodation options
+populateAccommodationOptions(areaId);
+}
+}
+}
+
+// Event listeners for booking links
+document.getElementById('heroBookBtn').addEventListener('click', function(e) {
+e.preventDefault();
+showBookingPage();
+});
+
+document.getElementById('ctaBookBtn').addEventListener('click', function(e) {
+e.preventDefault();
+showBookingPage();
+});
+
+document.getElementById('bookingLink').addEventListener('click', function(e) {
+e.preventDefault();
+showBookingPage();
+});
+
+document.getElementById('backToHome').addEventListener('click', function(e) {
+e.preventDefault();
+showHomePage();
+});
+
+// Initialize content language
+updateContentLanguage();
+</script>
+</body>
+</html>
